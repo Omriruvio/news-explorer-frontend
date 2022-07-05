@@ -1,0 +1,11 @@
+.hamburger {
+  all: unset;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background-image: url('../../images/burger.svg');
+}
+
+.hamburger_dark {
+  background-image: url('../../images/burger-black.svg');
+}

@@ -1,0 +1,22 @@
+.header {
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+@media screen and (min-width: 650px) {
+  .header {
+    height: 66px;
+    margin: 0 40px;
+  }
+}
+
+@media screen and (min-width: 999px) {
+  .header {
+    height: 80px;
+    margin: 0 104px;
+  }
+}

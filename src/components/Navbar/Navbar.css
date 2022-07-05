@@ -1,0 +1,36 @@
+.navbar {
+  display: flex;
+  height: 100%;
+  color: #ffffff;
+  gap: 16px;
+}
+
+.navbar_dark {
+  color: #1A1B22;
+}
+
+.navbar__link {
+  
+  text-decoration: none;
+  color: inherit;
+  /* max-height: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+}
+
+.navbar__link_active_dark {
+  border-bottom: #1A1B22 3px solid;
+}
+
+.navbar__link_active_light {
+  border-bottom: #ffffff 3px solid;
+}
+
+@media screen and (min-width: 999px) {
+  .navbar {
+    gap: 32px;
+  }
+}
