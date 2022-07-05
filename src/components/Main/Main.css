@@ -1,0 +1,30 @@
+main {
+  min-height: 100vh;
+}
+
+.main__wrapper {
+  min-height: 100vh;
+  background: url('../../images/main-bg-mobile.png') no-repeat;
+}
+
+@media screen and (min-width: 320.01px) {
+  .main__wrapper {
+    background: url('../../images/main-bg.png') no-repeat;
+    background-position: top center;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .main__wrapper {
+    background: url('../../images/main-bg.png') no-repeat;
+    background-position: top center;
+    background-size: auto 400px;
+  }
+}
+
+@media screen and (min-width: 999px) {
+  .main__wrapper {
+    background-position: top center;
+    background-size: auto;
+  }
+}
