@@ -6,14 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { PopupProvider } from './contexts/PopupContext';
 import { initialPopupState, popupReducer } from './utils/reducers/popupReducer';
+import { AuthProvider } from './contexts/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <PopupProvider initialState={initialPopupState} reducer={popupReducer}>
-        <App />
-      </PopupProvider>
+      <AuthProvider>
+        <PopupProvider initialState={initialPopupState} reducer={popupReducer}>
+          <App />
+        </PopupProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
