@@ -3,8 +3,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-right: 20px;
-  margin-left: 20px;
+  margin: 0;
+  padding: 0 20px;
+}
+
+.header_dark {
+  background-color: #1A1B22;
 }
 
 @media screen and (min-width: 650px) {

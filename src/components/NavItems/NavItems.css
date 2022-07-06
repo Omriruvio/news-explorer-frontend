@@ -14,6 +14,7 @@
   align-items: center;
   border-top: 3px solid transparent;
   border-bottom: 3px solid transparent;
+  /* width: min-content; */
 }
 
 .navbar__link_active_dark {

@@ -1,7 +1,18 @@
+import { useEffect, useState } from 'react';
+import { usePopups } from '../../contexts/PopupContext';
 import './DecoratorLine.css';
 
 const DecoratorLine = ({ isDark }) => {
-  const decoratorClassname = `header__decorator ${isDark ? 'header__decorator_dark' : ''}`;
+  const [popupState] = usePopups();
+  const [decoratorClassname, setDecoratorClassName] = useState('header__decorator');
+  useEffect(() => {
+    if (isDark) {
+      setDecoratorClassName('header__decorator header__decorator_dark');
+    } else {
+      setDecoratorClassName('header_decorator');
+    }
+  }, [isDark, popupState.isUserMenuOpen]);
+
   return <div className={decoratorClassname}></div>;
 };
 

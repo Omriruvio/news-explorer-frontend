@@ -3,7 +3,21 @@
   cursor: pointer;
   width: 24px;
   height: 24px;
+  background-size: contain;
   background-image: url('../../images/burger.svg');
+}
+
+.cross-button {
+  all: unset;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-image: url('../../images/close.svg');
+}
+
+.cross-button_dark {
+  background-image: url('../../images/close-black.svg');
 }
 
 .hamburger_dark {

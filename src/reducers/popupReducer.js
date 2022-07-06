@@ -9,6 +9,7 @@ const initialPopupState = {
 };
 
 const popupActions = {
+  closeAll: { type: 'close all popups' },
   openUserMenu: { type: 'open user menu' },
   closeUserMenu: { type: 'close user menu' },
   toggleUserMenu: { type: 'toggle user menu' },
