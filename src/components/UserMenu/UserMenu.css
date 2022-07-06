@@ -1,25 +1,42 @@
 .user-menu__overlay {
   height: 100%;
+  width: 100%;
   background-color: black;
   opacity: 0.5;
-  position: relative;
-  z-index: 1;
+  position: absolute;
 }
 
 .user-menu {
-  background-color: #1A1B22;
+  background-color: #1a1b22;
   color: #ffffff;
   padding: 16px 16px 24px 16px;
   margin: 0;
   display: flex;
   flex-direction: column;
-  position: relative;
-    z-index: 2;
+  position: absolute;
+  z-index: 1;
+  gap: 22px;
+}
 
+.user-menu .navbar__link {
+  line-height: 56px;
+  font-size: 18px;
+}
+
+.user-menu .navbar__text_with-large-bubble {
+  width: 288px;
+}
+
+.user-menu .navbar__text_with-bubble::after {
+  top: 0;
+  left: 0;
+  min-width: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .user-menu_dark {
   background-color: #ffffff;
-  color: #1A1B22;
-    
+  color: #1a1b22;
 }

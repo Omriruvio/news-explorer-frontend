@@ -9,7 +9,7 @@ const DecoratorLine = ({ isDark }) => {
     if (isDark) {
       setDecoratorClassName('header__decorator header__decorator_dark');
     } else {
-      setDecoratorClassName('header_decorator');
+      setDecoratorClassName('header__decorator');
     }
   }, [isDark, popupState.isUserMenuOpen]);
 

@@ -8,6 +8,7 @@
   gap: 17px;
   justify-content: center;
   color: #ffffff;
+  width: fit-content;
 }
 
 .navbar__text_with-bubble {

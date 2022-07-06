@@ -6,6 +6,7 @@ main {
   min-height: 100vh;
   height: 100vh;
   background: url('../../images/main-bg-mobile.png') no-repeat;
+  position: relative;
 }
 
 @media screen and (min-width: 321px) {
