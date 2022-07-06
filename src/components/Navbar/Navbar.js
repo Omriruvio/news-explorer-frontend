@@ -3,10 +3,10 @@ import Hamburger from '../Hamburger/Hamburger';
 import useWindowSize from '../../utils/hooks/UseWindowSize';
 import './Navbar.css';
 import NavItem from '../NavItem/NavItem';
-import LogoutIcon from '../LogoutIcon/LogoutIcon';
 
 const Navbar = ({ isDark }) => {
   const { width } = useWindowSize();
+
   const isMobileSized = width < 650;
   const activeClassName = `navbar__link navbar__link_active_${isDark ? 'dark' : 'light'}`;
 
