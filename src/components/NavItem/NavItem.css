@@ -7,6 +7,13 @@
   display: flex;
   gap: 17px;
   justify-content: center;
+  color: #ffffff;
+}
+
+.navbar__text_with-bubble {
+  height: min-content;
+  align-self: center;
+  cursor: pointer;
 }
 
 .navbar__text_with-bubble::after {
@@ -20,9 +27,9 @@
   border-radius: 100px;
 }
 
-/* .navbar__text_dark {
-
-} */
+.navbar__text_dark {
+  color: #1A1B22;
+}
 
 @media screen and (min-width: 650px) {
   .navbar__text_with-large-bubble {

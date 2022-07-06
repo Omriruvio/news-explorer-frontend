@@ -17,6 +17,10 @@
   /* width: min-content; */
 }
 
+.navbar__link_dark {
+  color: #1A1B22;
+}
+
 .navbar__link_active_dark {
   border-bottom: #1A1B22 3px solid;
 }

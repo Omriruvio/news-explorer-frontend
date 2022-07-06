@@ -10,7 +10,7 @@ const Main = () => {
   return (
     <div className="main__wrapper">
       <Header></Header>
-      {popupState.isUserMenuOpen && isMobileSized && <UserMenu></UserMenu>}
+      {popupState.isUserMenuOpen && isMobileSized && <UserMenu isDark={false} />}
     </div>
   );
 };

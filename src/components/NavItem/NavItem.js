@@ -13,20 +13,23 @@ const NavItem = ({ path = '/', isDark, hasBubble, text, isLarge, minWidth, child
   const activeClassName = noDecoration || hasBubble ? 'navbar__link' : `navbar__link navbar__link_active_${isDark ? 'dark' : 'light'}`;
 
   const handleClick = (e) => {
+    console.log('click');
     signinButton ? signIn('Elise') : signOut();
     popupDispatch(popupActions.closeAll);
   };
   return (
-    <NavLink
-      style={{ minWidth: minWidth, alignSelf: alignSelf }}
-      className={({ isActive }) => (isActive ? activeClassName : 'navbar__link')}
-      to={path}
-    >
+    <>
       <li onClick={handleClick} className={navItemClassname}>
-        {text}
-        {children}
+        <NavLink
+          style={{ minWidth: minWidth, alignSelf: alignSelf }}
+          className={({ isActive }) => (isActive ? activeClassName : 'navbar__link')}
+          to={path}
+        >
+          {text}
+          {children}
+        </NavLink>
       </li>
-    </NavLink>
+    </>
   );
 };
 

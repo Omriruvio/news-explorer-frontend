@@ -5,9 +5,9 @@
   gap: 16px;
 }
 
-.navbar_dark {
+/* .navbar_dark {
   color: #1A1B22;
-}
+} */
 
 @media screen and (min-width: 999px) {
   .navbar {

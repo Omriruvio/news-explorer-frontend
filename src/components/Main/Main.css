@@ -4,6 +4,7 @@ main {
 
 .main__wrapper {
   min-height: 100vh;
+  height: 100vh;
   background: url('../../images/main-bg-mobile.png') no-repeat;
 }
 
