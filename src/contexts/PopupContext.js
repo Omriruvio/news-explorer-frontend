@@ -1,12 +1,12 @@
-import React from 'react';
+import { createContext, useContext, useReducer } from 'react';
 
-const PopupContext = React.createContext();
+const PopupContext = createContext();
 PopupContext.displayName = 'Store';
 
-export const usePopups = () => React.useContext(PopupContext);
+export const usePopups = () => useContext(PopupContext);
 
 export const PopupProvider = ({ children, initialState, reducer }) => {
-  const [popupState, popupDispatch] = React.useReducer(reducer, initialState);
+  const [popupState, popupDispatch] = useReducer(reducer, initialState);
 
   return <PopupContext.Provider value={[popupState, popupDispatch]}>{children}</PopupContext.Provider>;
 };
