@@ -24,23 +24,23 @@
   left: -13px;
   min-width: calc(100% + 26px);
   height: calc(100% + 16px);
-  border: 1px solid #D1D2D6;
+  border: 1px solid #d1d2d6;
   border-radius: 100px;
 }
 
 .navbar__text_dark {
-  color: #1A1B22;
+  color: #1a1b22;
 }
 
 @media screen and (min-width: 650px) {
   .navbar__text_with-large-bubble {
-      min-width: calc(152px - 26px);
-    }
+    min-width: calc(152px - 26px);
+  }
 }
 @media screen and (min-width: 999px) {
   .navbar__text_with-large-bubble {
-      min-width: calc(176px - 26px);
-    }
+    min-width: calc(176px - 26px);
+  }
   .navbar__text {
     font-size: 18px;
   }

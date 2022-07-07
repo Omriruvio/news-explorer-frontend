@@ -21,10 +21,10 @@ const NewsCard = ({ alt, src, date, header, text, source, link }) => {
           <blockquote className="news-card__text" cite={source}>
             {text}
           </blockquote>
-          <a className="news-card__ref" href={link}>
-            {source}
-          </a>
         </div>
+        <a className="news-card__ref" href={link}>
+          {source}
+        </a>
       </article>
     </li>
   );
