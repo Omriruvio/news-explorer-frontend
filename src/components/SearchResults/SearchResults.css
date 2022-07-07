@@ -1,7 +1,7 @@
 .search-results {
   margin-top: 32px;
   padding: 0 16px;
-  background-color: #f5f6f7;
+  background-color: rgb(245, 246, 247);
 }
 
 .search-results__title {
@@ -25,7 +25,8 @@
   .search-results__article-container {
     display: grid;
     /* grid-template-columns: repeat(3, 1fr); */
-    grid-template-columns: repeat(auto-fit, minmax(224px, 1fr));
+    /* grid-template-columns: repeat(auto-fit, minmax(224px, 1fr)); */
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
     column-gap: 8px;
     row-gap: 10px;
     /* flex-direction: row;
@@ -43,7 +44,7 @@
 @media screen and (min-width: 999px) {
   .search-results__article-container {
     gap: 16px;
-    grid-template-columns: repeat(3, minmax(224px, 1fr));
+    /* grid-template-columns: repeat(3, minmax(224px, 1fr)); */
   }
 
   .search-results {

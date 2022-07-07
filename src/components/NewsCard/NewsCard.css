@@ -18,7 +18,7 @@
 }
 
 .news-card__image-container {
-  /* height: 196px; */
+  height: 196px;
 }
 
 .news-card__info {
@@ -90,6 +90,7 @@
 }
 
 .news-card__ref {
+  width: fit-content;
   font-family: Roboto-slab, sans-serif;
   text-transform: uppercase;
   color: #b6bcbf;
@@ -143,6 +144,10 @@
     padding-left: 24px;
     padding-right: 24px;
   }
+
+  .news-card__image-container {
+    height: 150px;
+  }
 }
 
 @media screen and (min-width: 999px) {
@@ -176,5 +181,8 @@
     -webkit-line-clamp: 2;
     line-clamp: 2;
     -webkit-box-orient: vertical;
+  }
+  .news-card__image-container {
+    height: 272px;
   }
 }
