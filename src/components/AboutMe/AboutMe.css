@@ -1,12 +1,8 @@
-/* <section className="about-me">
-      <img src={profileImage} alt="Omri Ruvio"></img>
-      <h2 className="about-me__title">About the author</h2>
-      <p className="about-me__text">{aboutMe}</p>
-      <p className="about-me__text">Feel free to contact me via the links below for business inquiries.</p>
-    </section> */
-
 .about-me {
   padding: 32px 24px 128px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .about-me__image {
@@ -44,9 +40,15 @@
   flex-direction: column;
 }
 
+@media screen and (min-width: 450px) {
+  .about-me__info-warpper {
+    max-width: 75%;
+  }
+}
+
 @media screen and (min-width: 650px) {
   .about-me {
-    display: flex;
+    flex-direction: row;
     padding: 40px 40px 61px;
     gap: 32px;
   }
@@ -60,9 +62,6 @@
 @media screen and (min-width: 999px) {
   .about-me {
     padding: 80px 104px 80px 104px;
-  }
-  .about-me__title {
-    margin-top: 50px;
   }
   .about-me__info {
     max-width: 600px;
