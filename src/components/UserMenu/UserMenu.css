@@ -1,5 +1,5 @@
 .user-menu__overlay {
-  height: 100%;
+  height: 100vh;
   width: 100%;
   background-color: black;
   opacity: 0.5;
@@ -16,6 +16,7 @@
   position: absolute;
   z-index: 1;
   gap: 22px;
+  width: 100%;
 }
 
 .user-menu .navbar__link {

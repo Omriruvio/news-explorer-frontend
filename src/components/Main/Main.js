@@ -11,13 +11,15 @@ const Main = () => {
   const isMobileSized = useWindowSize().width < 650;
   const [popupState] = usePopups();
   return (
-    <div className="main__wrapper">
-      <Header></Header>
-      {popupState.isUserMenuOpen && isMobileSized && <UserMenu isDark={false} />}
-      <PageTitle />
-      <SearchForm />
+    <>
+      <div className="main__wrapper">
+        <Header></Header>
+        {popupState.isUserMenuOpen && isMobileSized && <UserMenu isDark={false} />}
+        <PageTitle />
+        <SearchForm />
+      </div>
       <SearchResults />
-    </div>
+    </>
   );
 };
 
