@@ -6,8 +6,8 @@
   background-color: #fff;
   border-radius: 15px;
   overflow: hidden;
-  display: grid;
-  grid-template-rows: max-content;
+  display: flex;
+  flex-direction: column;
 }
 
 .news-card__image {
@@ -77,6 +77,7 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
+  min-height: 110px;
   margin: 0 0 8px 0;
   padding: 0;
 
@@ -99,10 +100,10 @@
   line-height: 20px;
   letter-spacing: 0.4px;
   padding: 0 16px 16px;
-  align-self: flex-end;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 @media screen and (min-width: 650px) {
@@ -124,6 +125,7 @@
   }
   .news-card__text {
     margin-bottom: 12px;
+    min-height: 88px;
     /* Hides content past 4 lines of text */
     overflow: hidden;
     text-overflow: ellipsis;
@@ -164,6 +166,7 @@
   }
   .news-card__text {
     margin-bottom: 18px;
+    min-height: 110px;
     /* Hides content past 5 lines of text */
     overflow: hidden;
     text-overflow: ellipsis;

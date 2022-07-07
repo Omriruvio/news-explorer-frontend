@@ -6,6 +6,7 @@ import useWindowSize from '../../hooks/UseWindowSize';
 import PageTitle from '../PageTitle/PageTitle';
 import SearchForm from '../SearchForm/SearchForm';
 import SearchResults from '../SearchResults/SearchResults';
+import AboutMe from '../AboutMe/AboutMe';
 
 const Main = () => {
   const isMobileSized = useWindowSize().width < 650;
@@ -19,6 +20,7 @@ const Main = () => {
         <SearchForm />
       </div>
       <SearchResults />
+      <AboutMe />
     </>
   );
 };

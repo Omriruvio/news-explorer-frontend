@@ -2,7 +2,7 @@
 @import url('./vendor/normalize.css');
 @import url('./vendor/fonts.css');
 /* normalize & fonts*/
-body {
-  display: block;
+
+* {
   box-sizing: border-box;
 }
