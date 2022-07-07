@@ -1,0 +1,73 @@
+.news-card {
+  position: relative;
+}
+
+.news-card__image {
+  width: 100%;
+  border-radius: 15px 15px 0 0;
+  min-height: 196px;
+  object-fit: cover;
+}
+
+.news-card__info {
+  padding: 0 16px;
+}
+
+.news-card__bookmark-button-container {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.news-card__bookmark-button-image {
+  position: relative;
+  top: 3px;
+}
+
+.news-card__bookmark-button {
+  /* background-color: #fff; */
+  border: none;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+}
+
+.news-card__date {
+  padding: 0;
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 10px;
+  color: #b6bcbf;
+  font-family: Source sans pro, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.news-card__header {
+  font-family: Roboto-slab, sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0 0 14px 0;
+  padding: 0;
+}
+
+.news-card__text {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 0 0 8px 0;
+  padding: 0;
+}
+
+.news-card__ref {
+  font-family: Roboto-slab, sans-serif;
+  text-transform: uppercase;
+  color: #b6bcbf;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+}

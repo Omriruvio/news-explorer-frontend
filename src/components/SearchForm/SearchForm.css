@@ -6,6 +6,7 @@
 
 .search-form__input {
   background-color: #fff;
+  color: #1a1b22;
   border: #d1d2d6 1px solid;
   border-radius: 100px;
   padding: 17px 16px;
@@ -37,4 +38,43 @@
   margin: auto;
   background-color: #2f71e5;
   color: #fff;
+}
+
+@media screen and (min-width: 650px) {
+  .search-form {
+    margin-top: 48px;
+  }
+  .search-form__input {
+    display: inline-block;
+    padding: 17px 65px 17px 24px;
+    width: 338px;
+    position: relative;
+    z-index: 1;
+    left: 25px;
+  }
+  .search-form__submit {
+    display: inline-block;
+    width: 160px;
+    position: relative;
+    z-index: 1;
+    right: 25px;
+  }
+}
+
+@media screen and (min-width: 999px) {
+  .search-form {
+    margin-top: 88px;
+  }
+  .search-form__input {
+    padding: 21px 65px 21px 24px;
+    width: 500px;
+    left: 30px;
+  }
+  .search-form__submit {
+    display: inline-block;
+    width: 168px;
+    height: 64px;
+    right: 30px;
+    box-sizing: content-box;
+  }
 }
