@@ -1,14 +1,16 @@
 .search-results__show-more-button {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: none;
   border: none;
   border-radius: 80px;
-  background-color: #f5f6f7;
+  background-color: #fff;
   cursor: pointer;
   width: 100%;
   height: 56px;
   padding: 0;
-  margin: 16px auto 24px;
+  margin: 16px auto 0;
   transition: background-color 0.3s ease-in-out;
 
   color: #1a1b22;

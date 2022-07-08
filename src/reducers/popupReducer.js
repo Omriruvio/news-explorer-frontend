@@ -6,6 +6,9 @@ const initialPopupState = {
   isAuthOkPopupOpen: false,
   isAuthErrPopupOpen: false,
   isUserMenuOpen: false,
+  isSigninPopupOpen: false,
+  isSignupPopupOpen: false,
+  isSuccessPopupOpen: false,
 };
 
 const popupActions = {
@@ -13,12 +16,30 @@ const popupActions = {
   openUserMenu: { type: 'open user menu' },
   closeUserMenu: { type: 'close user menu' },
   toggleUserMenu: { type: 'toggle user menu' },
+  closeSignInPopup: { type: 'close signin popup' },
+  openSignInPopup: { type: 'open signin popup' },
+  openSignUpPopup: { type: 'open signup popup' },
+  closeSignUpPopup: { type: 'close signup popup' },
+  openSuccessPopup: { type: 'open success popup' },
+  closeSuccessPopup: { type: 'close success popup' },
 };
 
 const popupReducer = (popupState, action) => {
   switch (action.type) {
     case 'close all popups':
       return initialPopupState;
+    case 'open success popup':
+      return { ...popupState, isSuccessPopupOpen: true };
+    case 'close success popup':
+      return { ...popupState, isSuccessPopupOpen: false };
+    case 'open signup popup':
+      return { ...popupState, isSignupPopupOpen: true };
+    case 'close signup popup':
+      return { ...popupState, isSignupPopupOpen: false };
+    case 'open signin popup':
+      return { ...popupState, isSigninPopupOpen: true };
+    case 'close signin popup':
+      return { ...popupState, isSigninPopupOpen: false };
     case 'toggle user menu':
       return { ...popupState, isUserMenuOpen: !popupState.isUserMenuOpen };
     case 'close user menu':

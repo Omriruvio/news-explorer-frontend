@@ -43,7 +43,7 @@
 @media screen and (min-width: 650px) {
   .search-form {
     margin-top: 48px;
-    padding-bottom: 48px;
+    padding-bottom: 28px;
   }
   .search-form__input {
     display: inline-block;
@@ -59,13 +59,14 @@
     position: relative;
     z-index: 1;
     right: 25px;
+    min-height: 58px;
   }
 }
 
 @media screen and (min-width: 999px) {
   .search-form {
     margin-top: 88px;
-    padding-bottom: 80px;
+    padding-bottom: 32px;
   }
   .search-form__input {
     padding: 21px 65px 21px 24px;
@@ -75,7 +76,7 @@
   .search-form__submit {
     display: inline-block;
     width: 168px;
-    height: 64px;
+    height: 65px;
     right: 30px;
     box-sizing: content-box;
   }

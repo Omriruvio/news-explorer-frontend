@@ -13,9 +13,9 @@ const NavItem = ({ path = '/', isDark, hasBubble, text, isLarge, minWidth, child
   const activeClassName = noDecoration || hasBubble ? 'navbar__link' : `navbar__link navbar__link_active_${isDark ? 'dark' : 'light'}`;
 
   const handleClick = (e) => {
-    signinButton && signIn('Elise');
+    signinButton && popupDispatch(popupActions.openSignInPopup);
     signoutButton && signOut();
-    popupDispatch(popupActions.closeAll);
+    popupDispatch(popupActions.closeUserMenu);
   };
   return (
     <>

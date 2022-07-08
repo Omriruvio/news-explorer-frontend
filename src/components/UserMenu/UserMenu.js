@@ -25,7 +25,7 @@ const UserMenu = ({ isDark }) => {
         {currentUser.isLoggedIn ? (
           <>
             <NavItem signoutButton hasBubble isLarge isDark={isDark} text={currentUser.name}>
-              <LogoutIcon marginLeft={'1rem'} isDark={isDark} />
+              <LogoutIcon styles={{ marginLeft: '1rem' }} isDark={isDark} />
             </NavItem>
           </>
         ) : (

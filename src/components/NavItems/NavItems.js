@@ -12,7 +12,7 @@ const NavItems = ({ isDark }) => {
         <NavItem isDark={isDark} text="Saved articles" path="/saved-articles" minWidth="160px" />
         {currentUser.isLoggedIn ? (
           <NavItem signoutButton hasBubble isDark={isDark} text={currentUser.name}>
-            <LogoutIcon isDark={isDark} />
+            <LogoutIcon styles={{ marginLeft: '1rem' }} isDark={isDark} />
           </NavItem>
         ) : (
           <NavItem signinButton hasBubble isLarge isDark={isDark} text="Sign in" />
@@ -23,21 +23,3 @@ const NavItems = ({ isDark }) => {
 };
 
 export default NavItems;
-
-/* <NavLink style={{ minWidth: '64px' }} className={({ isActive }) => (isActive ? activeClassName : 'navbar__link')} to="/">
-        <NavItem isDark={isDark} text="Home" />
-      </NavLink> */
-
-// <NavLink style={{ minWidth: '160px' }} className={({ isActive }) => (isActive ? activeClassName : 'navbar__link')} to="/saved-articles">
-//   <NavItem isDark={isDark} text="Saved articles" />
-// </NavLink>;
-
-// <NavLink className={({ isActive }) => (isActive ? activeClassName : 'navbar__link')} to="/signin">
-//   <NavItem hasBubble isLarge isDark={isDark} text="Sign in"></NavItem>
-// </NavLink>;
-
-/* <NavLink className={({ isActive }) => (isActive ? activeClassName : 'navbar__link')} to="/signin">
-        <NavItem hasBubble isDark={isDark} text={'Elise'}>
-          <LogoutIcon isDark={isDark} />
-        </NavItem>
-      </NavLink> */
