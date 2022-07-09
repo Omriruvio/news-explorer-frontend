@@ -2,8 +2,9 @@ import './SearchResults.css';
 import NewsCard from '../NewsCard/NewsCard';
 import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
 import { useEffect, useState } from 'react';
-import { exampleCards } from '../../constants/exampleCards';
+import { exampleCards } from '../../constants/mockData';
 import Preloader from '../Preloader/Preloader';
+import ArticleSection from '../ArticleSection/ArticleSection';
 
 const SearchResults = () => {
   const [displayCards, setDisplayCards] = useState([]);
@@ -13,6 +14,7 @@ const SearchResults = () => {
   const getDisplayCards = (cardArray, count = 1, size = 3) => {
     const lastIndex = count * size - 1;
     const cardsToDisplay = cardArray.slice(0, lastIndex + 1);
+    // TODO - replace key with unique card id
     return cardsToDisplay.map((card, i) => <NewsCard key={i} {...card}></NewsCard>);
   };
 
@@ -35,12 +37,13 @@ const SearchResults = () => {
   }, [displaySets]);
 
   return (
-    <section className="search-results">
-      {displaySets !== 0 && <h2 className="search-results__title">Search results</h2>}
-      <ul className="search-results__article-container">{displayCards}</ul>
-      {!isLoading && /* displaySets !== 0 && */ <ShowMoreButton getNextCards={handleGetNextCards} />}
+    /* displaySets !== 0 && */
+    <ArticleSection>
+      {displaySets !== 0 && <h2 className="results__title">Search results</h2>}
+      <ul className="results__article-container">{displayCards}</ul>
+      {!isLoading && <ShowMoreButton getNextCards={handleGetNextCards} />}
       {isLoading && <Preloader />}
-    </section>
+    </ArticleSection>
   );
 };
 
