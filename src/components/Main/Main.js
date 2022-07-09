@@ -10,6 +10,7 @@ import AboutMe from '../AboutMe/AboutMe';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { popupActions } from '../../reducers/popupReducer';
 import { useAuth } from '../../contexts/AuthContext';
+import AuthForm from '../AuthForm/AuthForm';
 
 const Main = () => {
   const isMobileSized = useWindowSize().width < 650;
@@ -43,7 +44,9 @@ const Main = () => {
         buttonText="Sign in"
         redirectText="Sign up"
         handleRedirect={showSignUp}
-      ></PopupWithForm>
+      >
+        <AuthForm />
+      </PopupWithForm>
       <PopupWithForm
         isOpen={popupState.isSignupPopupOpen}
         onSubmit={handleSignup}
@@ -53,7 +56,9 @@ const Main = () => {
         buttonText="Sign up"
         redirectText="Sign in"
         handleRedirect={showSignIn}
-      ></PopupWithForm>
+      >
+        <AuthForm />
+      </PopupWithForm>
       <PopupWithForm
         hideForm={true}
         name="success"

@@ -2,9 +2,11 @@ import './NavItems.css';
 import NavItem from '../NavItem/NavItem';
 import LogoutIcon from '../LogoutIcon/LogoutIcon';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLocation } from 'react-router';
 
 const NavItems = ({ isDark }) => {
   const { currentUser } = useAuth();
+  const isSavedArticlesPage = useLocation().pathname === '/saved-articles';
   return (
     <nav className={`navbar ${isDark ? 'navbar_dark' : ''}`}>
       <ul className="navbar__list">
@@ -14,8 +16,10 @@ const NavItems = ({ isDark }) => {
           <NavItem signoutButton hasBubble isDark={isDark} text={currentUser.name}>
             <LogoutIcon styles={{ marginLeft: '1rem' }} isDark={isDark} />
           </NavItem>
-        ) : (
+        ) : !isSavedArticlesPage ? (
           <NavItem signinButton hasBubble isLarge isDark={isDark} text="Sign in" />
+        ) : (
+          <></>
         )}
       </ul>
     </nav>

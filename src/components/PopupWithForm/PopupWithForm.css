@@ -117,6 +117,12 @@
 }
 
 @media screen and (min-width: 650px) {
+  .form__submit-button {
+    margin-top: 39px;
+  }
+  .popup__title {
+    margin-bottom: 22px;
+  }
   .popup__close-button {
     width: 40px;
     height: 40px;

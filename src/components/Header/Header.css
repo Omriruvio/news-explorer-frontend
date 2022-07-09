@@ -5,6 +5,8 @@
   align-items: center;
   margin: 0;
   padding: 0 16px;
+  position: relative;
+  z-index: 2;
 }
 
 .header_dark {

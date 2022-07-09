@@ -1,7 +1,11 @@
 import './Preloader.css';
 
 const Preloader = () => {
-  return <div className="circle-preloader"></div>;
+  return (
+    <section className="preloader">
+      <div className="preloader__circle"></div>
+    </section>
+  );
 };
 
 export default Preloader;
