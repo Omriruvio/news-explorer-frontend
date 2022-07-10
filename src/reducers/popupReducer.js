@@ -11,19 +11,6 @@ const initialPopupState = {
   isSuccessPopupOpen: false,
 };
 
-const popupActions = {
-  closeAll: { type: 'close all popups' },
-  openUserMenu: { type: 'open user menu' },
-  closeUserMenu: { type: 'close user menu' },
-  toggleUserMenu: { type: 'toggle user menu' },
-  closeSignInPopup: { type: 'close signin popup' },
-  openSignInPopup: { type: 'open signin popup' },
-  openSignUpPopup: { type: 'open signup popup' },
-  closeSignUpPopup: { type: 'close signup popup' },
-  openSuccessPopup: { type: 'open success popup' },
-  closeSuccessPopup: { type: 'close success popup' },
-};
-
 const popupReducer = (popupState, action) => {
   switch (action.type) {
     case 'close all popups':
@@ -75,4 +62,4 @@ const popupReducer = (popupState, action) => {
   }
 };
 
-export { popupReducer, popupActions, initialPopupState };
+export { popupReducer, initialPopupState };

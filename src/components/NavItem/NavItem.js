@@ -1,8 +1,7 @@
 import './NavItem.css';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { usePopups } from '../../contexts/PopupContext';
-import { popupActions } from '../../reducers/popupReducer';
+import { usePopups, popupActions } from '../../contexts/PopupContext';
 import { useLocation } from 'react-router';
 
 const NavItem = ({ path = '/', hasBubble, text, isLarge, minWidth, children, signinButton, signoutButton, noDecoration, alignSelf }) => {

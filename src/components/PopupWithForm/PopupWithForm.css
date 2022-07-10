@@ -18,30 +18,6 @@
   cursor: pointer;
   padding: 0;
 }
-.form__submit-button {
-  margin-top: 23px;
-  padding: 0;
-  border: none;
-  border-radius: 100px;
-  background-color: #2f71e5;
-  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
-  color: #fff;
-  min-height: 64px;
-  font-family: Roboto, sans-serif;
-  font-weight: 500;
-  font-size: 18px;
-  cursor: pointer;
-  transition: opacity 0.4s;
-}
-
-.form__submit-button_disabled {
-  color: #b6bcbf;
-  background-color: #e6e8eb;
-  cursor: default;
-}
-.form__submit-button_disabled:hover {
-  opacity: 20%;
-}
 
 .form {
   margin-bottom: 16px;
@@ -49,9 +25,6 @@
   flex-direction: column;
 }
 
-.form__submit-button:hover {
-  opacity: 60%;
-}
 .popup {
   display: flex;
   position: fixed;

@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import { usePopups } from '../../contexts/PopupContext';
-import { popupActions } from '../../reducers/popupReducer';
+import { usePopups, popupActions } from '../../contexts/PopupContext';
 import { useLocation } from 'react-router';
 import './Logo.css';
 

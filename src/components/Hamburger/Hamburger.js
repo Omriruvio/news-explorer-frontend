@@ -1,6 +1,5 @@
 import './Hamburger.css';
-import { popupActions } from '../../reducers/popupReducer';
-import { usePopups } from '../../contexts/PopupContext';
+import { usePopups, popupActions } from '../../contexts/PopupContext';
 import { useLocation, useNavigate } from 'react-router';
 
 const Hamburger = () => {

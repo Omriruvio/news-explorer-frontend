@@ -1,7 +1,6 @@
 import './UserMenu.css';
 import NavItem from '../NavItem/NavItem';
-import { usePopups } from '../../contexts/PopupContext';
-import { popupActions } from '../../reducers/popupReducer';
+import { usePopups, popupActions } from '../../contexts/PopupContext';
 import { useAuth } from '../../contexts/AuthContext';
 import LogoutIcon from '../LogoutIcon/LogoutIcon';
 import { useLocation } from 'react-router';
