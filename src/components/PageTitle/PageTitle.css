@@ -1,4 +1,4 @@
-.page__title {
+.main__title {
   font-family: Roboto-slab, sans-serif;
   font-weight: 400;
   font-size: 36px;
@@ -8,7 +8,7 @@
   margin: 30px 0 16px;
 }
 
-.page__subtitle {
+.main__subtitle {
   font-family: Roboto, sans-serif;
   font-weight: 400;
   font-size: 18px;
@@ -19,13 +19,13 @@
 }
 
 @media screen and (min-width: 650px) {
-  .page__title {
+  .main__title {
     max-width: 452px;
     padding: 0;
     margin: 38px auto 16px;
   }
 
-  .page__subtitle {
+  .main__subtitle {
     padding: 0;
     max-width: 452px;
     margin: auto;
@@ -33,14 +33,14 @@
 }
 
 @media screen and (min-width: 999px) {
-  .page__title {
+  .main__title {
     max-width: 608px;
     margin: 80px auto 32px;
     font-size: 60px;
     line-height: 64px;
   }
 
-  .page__subtitle {
+  .main__subtitle {
     max-width: 608px;
     margin: auto;
   }

@@ -1,7 +1,3 @@
-main {
-  min-height: 100vh;
-}
-
 .main__wrapper {
   background: url('../../images/main-bg-mobile.png') no-repeat;
   position: relative;

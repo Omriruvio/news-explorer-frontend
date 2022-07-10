@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext();
+AuthContext.displayName = 'Auth';
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -9,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = (name) => setCurrentUser({ name, isLoggedIn: true });
 
-  const signOut = () => setCurrentUser({ name: 'Elise', isLoggedIn: false });
+  const signOut = () => setCurrentUser({ name: '', isLoggedIn: false });
 
   return <AuthContext.Provider value={{ currentUser, signIn, signOut }}>{children}</AuthContext.Provider>;
 };

@@ -100,12 +100,12 @@ const Main = () => {
           handleRedirect={showSignIn}
         ></PopupWithForm>
       )}
-      <div className="main__wrapper">
+      <section className="main__wrapper">
         <Header />
         {popupState.isUserMenuOpen && isMobileSized && <UserMenu />}
         <PageTitle />
         <SearchForm handleSearch={handleSearchSubmit} />
-      </div>
+      </section>
       {nothingFound && <NothingFound />}
       <SearchResults isSearching={isSearching} searchResults={searchResults} />
       <AboutMe />

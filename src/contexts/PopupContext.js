@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer } from 'react';
 
 const PopupContext = createContext();
-PopupContext.displayName = 'Store';
+PopupContext.displayName = 'Popups';
 
 export const popupActions = {
   closeAll: { type: 'close all popups' },
