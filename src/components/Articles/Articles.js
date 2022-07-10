@@ -10,8 +10,6 @@ import { savedCards } from '../../constants/mockData';
 import NewsCard from '../NewsCard/NewsCard';
 
 const Articles = () => {
-  const isMobileSized = useWindowSize().width < 650;
-  const [popupState] = usePopups();
   const [displayCards, setDisplayCards] = useState([]);
 
   useEffect(() => {
@@ -21,8 +19,7 @@ const Articles = () => {
 
   return (
     <>
-      <Header isDark></Header>
-      {popupState.isUserMenuOpen && isMobileSized && <UserMenu isDark />}
+      <Header />
       <SavedNewsHeader />
       <ArticleSection>
         <ul className="results__article-container">{displayCards}</ul>

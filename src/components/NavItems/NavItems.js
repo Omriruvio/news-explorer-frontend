@@ -4,20 +4,20 @@ import LogoutIcon from '../LogoutIcon/LogoutIcon';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLocation } from 'react-router';
 
-const NavItems = ({ isDark }) => {
+const NavItems = () => {
   const { currentUser } = useAuth();
-  const isSavedArticlesPage = useLocation().pathname === '/saved-articles';
+  const isSavedArticles = useLocation().pathname === '/saved-articles';
   return (
-    <nav className={`navbar ${isDark ? 'navbar_dark' : ''}`}>
+    <nav className={`navbar ${isSavedArticles ? 'navbar_dark' : ''}`}>
       <ul className="navbar__list">
-        <NavItem isDark={isDark} text="Home" path="/" minWidth="64px" />
-        <NavItem isDark={isDark} text="Saved articles" path="/saved-articles" minWidth="160px" />
+        <NavItem text="Home" path="/" minWidth="64px" />
+        <NavItem text="Saved articles" path="/saved-articles" minWidth="160px" />
         {currentUser.isLoggedIn ? (
-          <NavItem signoutButton hasBubble isDark={isDark} text={currentUser.name}>
-            <LogoutIcon styles={{ marginLeft: '1rem' }} isDark={isDark} />
+          <NavItem signoutButton hasBubble text={currentUser.name}>
+            <LogoutIcon styles={{ marginLeft: '1rem' }} />
           </NavItem>
-        ) : !isSavedArticlesPage ? (
-          <NavItem signinButton hasBubble isLarge isDark={isDark} text="Sign in" />
+        ) : !isSavedArticles ? (
+          <NavItem signinButton hasBubble isLarge text="Sign in" />
         ) : (
           <></>
         )}

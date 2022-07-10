@@ -73,8 +73,8 @@ const Main = () => {
         handleRedirect={showSignIn}
       ></PopupWithForm>
       <div className="main__wrapper">
-        <Header></Header>
-        {popupState.isUserMenuOpen && isMobileSized && <UserMenu isDark={false} />}
+        <Header />
+        {popupState.isUserMenuOpen && isMobileSized && <UserMenu />}
         <PageTitle />
         <SearchForm />
       </div>

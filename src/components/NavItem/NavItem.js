@@ -3,20 +3,23 @@ import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { usePopups } from '../../contexts/PopupContext';
 import { popupActions } from '../../reducers/popupReducer';
+import { useLocation } from 'react-router';
 
-const NavItem = ({ path = '/', isDark, hasBubble, text, isLarge, minWidth, children, signinButton, signoutButton, noDecoration, alignSelf }) => {
-  let navItemClassname = `navbar__text ${isDark ? 'navbar__text_dark' : ''}`;
+const NavItem = ({ path = '/', hasBubble, text, isLarge, minWidth, children, signinButton, signoutButton, noDecoration, alignSelf }) => {
+  const { signOut } = useAuth();
+  const [, popupDispatch] = usePopups();
+  const isSavedArticles = useLocation().pathname === '/saved-articles';
+  let navItemClassname = `navbar__text ${isSavedArticles ? 'navbar__text_dark' : ''}`;
   if (hasBubble) navItemClassname += ` navbar__text_with-bubble`;
   if (isLarge) navItemClassname += ` navbar__text_with-large-bubble`;
-  const { signIn, signOut } = useAuth();
-  const [popupState, popupDispatch] = usePopups();
-  const activeClassName = noDecoration || hasBubble ? 'navbar__link' : `navbar__link navbar__link_active_${isDark ? 'dark' : 'light'}`;
+  const activeClassName = noDecoration || hasBubble ? 'navbar__link' : `navbar__link navbar__link_active_${isSavedArticles ? 'dark' : 'light'}`;
 
   const handleClick = (e) => {
     signinButton && popupDispatch(popupActions.openSignInPopup);
     signoutButton && signOut();
     popupDispatch(popupActions.closeUserMenu);
   };
+
   return (
     <>
       <li onClick={handleClick} className={navItemClassname}>

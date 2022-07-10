@@ -6,8 +6,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import LogoutIcon from '../LogoutIcon/LogoutIcon';
 import { useLocation } from 'react-router';
 
-const UserMenu = ({ isDark }) => {
-  const menuClassName = `user-menu ${isDark ? 'user-menu_dark' : ''}`;
+const UserMenu = () => {
   const [, popupDispatch] = usePopups();
   const { currentUser } = useAuth();
   const isSavedArticles = useLocation().pathname === '/saved-articles';
@@ -20,16 +19,16 @@ const UserMenu = ({ isDark }) => {
 
   return (
     <>
-      <ul className={menuClassName}>
-        <NavItem noDecoration isDark={isDark} text={displayPath} path={routeToPath} />
+      <ul className="user-menu">
+        <NavItem noDecoration text={displayPath} path={routeToPath} />
         {currentUser.isLoggedIn ? (
           <>
-            <NavItem signoutButton hasBubble isLarge isDark={isDark} text={currentUser.name}>
-              <LogoutIcon styles={{ marginLeft: '1rem' }} isDark={isDark} />
+            <NavItem signoutButton hasBubble isLarge text={currentUser.name}>
+              <LogoutIcon styles={{ marginLeft: '1rem' }} />
             </NavItem>
           </>
         ) : (
-          !isSavedArticles && <NavItem signinButton noDecoration isDark={isDark} text="Sign in" hasBubble isLarge></NavItem>
+          !isSavedArticles && <NavItem signinButton noDecoration text="Sign in" hasBubble isLarge></NavItem>
         )}
       </ul>
       <div onClick={handleOverlayClick} className="user-menu__overlay"></div>
