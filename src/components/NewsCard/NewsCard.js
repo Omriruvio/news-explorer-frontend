@@ -1,18 +1,12 @@
-import { useState } from 'react';
 import './NewsCard.css';
-import bookmarkGrey from '../../images/bookmark-grey.svg';
+import CardLabel from '../CardLabel/CardLabel';
 
 const NewsCard = ({ alt, src, date, header, text, source, link }) => {
-  const [bookmarkIcon /* setBookmarkIcon */] = useState(bookmarkGrey);
   return (
     <li>
       <article className="news-card">
         <div className="news-card__image-container">
-          <div className="news-card__bookmark-button-container">
-            <button className="news-card__bookmark-button" type="button">
-              <img className="news-card__bookmark-button-image" src={bookmarkIcon} alt="bookmark icon"></img>
-            </button>
-          </div>
+          <CardLabel />
           <img className="news-card__image" src={src} alt={alt}></img>
         </div>
         <div className="news-card__info">
