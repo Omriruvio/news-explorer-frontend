@@ -1,8 +1,5 @@
 import Header from '../Header/Header';
 import './Articles.css';
-import UserMenu from '../UserMenu/UserMenu';
-import { usePopups } from '../../contexts/PopupContext';
-import useWindowSize from '../../hooks/UseWindowSize';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import ArticleSection from '../ArticleSection/ArticleSection';
 import { useEffect, useState } from 'react';

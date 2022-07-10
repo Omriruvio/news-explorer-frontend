@@ -21,11 +21,9 @@ const UserMenu = () => {
       <ul className="user-menu">
         <NavItem noDecoration text={displayPath} path={routeToPath} />
         {currentUser.isLoggedIn ? (
-          <>
-            <NavItem signoutButton hasBubble isLarge text={currentUser.name}>
-              <LogoutIcon styles={{ marginLeft: '1rem' }} />
-            </NavItem>
-          </>
+          <NavItem signoutButton hasBubble isLarge text={currentUser.name}>
+            <LogoutIcon styles={{ marginLeft: '1rem' }} />
+          </NavItem>
         ) : (
           !isSavedArticles && <NavItem signinButton noDecoration text="Sign in" hasBubble isLarge></NavItem>
         )}

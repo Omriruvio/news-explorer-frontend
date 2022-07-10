@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useInputsAndValidation } from '../../hooks/UseInputsAndValidation';
 import './AuthForm.css';
 

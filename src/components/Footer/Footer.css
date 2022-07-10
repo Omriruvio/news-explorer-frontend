@@ -5,12 +5,14 @@
   font-family: Roboto, sans-serif;
   background-color: #fff;
 }
+
 .footer__nav-wrapper {
   display: flex;
   justify-content: space-between;
   height: 74px;
   flex-basis: content;
 }
+
 .footer__social-links {
   padding: 0;
   margin: 0;
@@ -21,10 +23,12 @@
   gap: 26px;
   place-items: center;
 }
+
 .footer__social-link-image {
   display: block;
   width: 20px;
 }
+
 .footer__page-links {
   list-style: none;
   padding: 0;
@@ -36,10 +40,12 @@
   font-weight: 400;
   height: 100%;
 }
+
 .footer__page-link {
   text-decoration: none;
   color: inherit;
 }
+
 .footer__copyright {
   font-size: 14px;
   font-weight: 400;
@@ -55,10 +61,12 @@
     grid-template-rows: 1fr;
     align-items: end;
   }
+
   .footer__page-links {
     flex-direction: row;
     gap: 18px;
   }
+
   .footer__copyright {
     font-size: 16px;
   }
@@ -71,18 +79,22 @@
     align-items: flex-end;
     padding: 24px 40px 18px;
   }
+
   .footer__nav-wrapper {
     height: auto;
   }
+
   .footer__page-links {
     align-items: flex-end;
     margin-right: 25px;
     line-height: 24px;
   }
+
   .footer__copyright {
     margin: 0;
     font-size: 16px;
   }
+
   .footer__social-links {
     gap: 18px;
   }
@@ -92,10 +104,12 @@
   .footer {
     padding: 32px 104px 26px;
   }
+
   .footer__page-links {
     margin-right: 41px;
     gap: 28px;
   }
+
   .footer__social-links {
     gap: 28px;
   }

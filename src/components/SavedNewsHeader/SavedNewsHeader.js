@@ -15,6 +15,7 @@ const SavedNewsHeader = () => {
     setKeywords(newKeywordString);
     setSavedArticles(savedCards);
   }, []);
+
   return (
     <section className="saved-articles-info">
       <h2 className="saved-articles-info__header">Saved articles</h2>

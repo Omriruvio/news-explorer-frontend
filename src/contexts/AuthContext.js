@@ -11,9 +11,5 @@ export const AuthProvider = ({ children }) => {
 
   const signOut = () => setCurrentUser({ name: 'Elise', isLoggedIn: false });
 
-  return (
-    <>
-      <AuthContext.Provider value={{ currentUser, signIn, signOut }}>{children}</AuthContext.Provider>
-    </>
-  );
+  return <AuthContext.Provider value={{ currentUser, signIn, signOut }}>{children}</AuthContext.Provider>;
 };

@@ -1,5 +1,4 @@
 import './SearchForm.css';
-import { useState } from 'react';
 import { exampleCards } from '../../constants/mockData';
 
 const SearchForm = ({ buttonText = 'Search', handleSearch }) => {

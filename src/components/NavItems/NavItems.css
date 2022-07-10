@@ -14,15 +14,14 @@
   align-items: center;
   border-top: 3px solid transparent;
   border-bottom: 3px solid transparent;
-  /* width: min-content; */
 }
 
 .navbar__link_dark {
-  color: #1A1B22;
+  color: #1a1b22;
 }
 
 .navbar__link_active_dark {
-  border-bottom: #1A1B22 3px solid;
+  border-bottom: #1a1b22 3px solid;
 }
 
 .navbar__link_active_light {

@@ -20,7 +20,6 @@ const Main = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [nothingFound, setNothingFound] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
 
   const showSignUp = () => {
     popupDispatch(popupActions.closeAll);

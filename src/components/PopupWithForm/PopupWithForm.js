@@ -3,7 +3,7 @@ import { cloneElement } from 'react';
 import { usePopups, popupActions } from '../../contexts/PopupContext';
 
 const PopupWithForm = (props) => {
-  const { hideForm, name, title, onSubmit, children, buttonText, isOpen, redirectText, handleRedirect } = props;
+  const { hideForm, name, title, /* onSubmit, */ children, /*  buttonText, */ isOpen, redirectText, handleRedirect } = props;
   const [, popupDispatch] = usePopups();
 
   const handleClick = (e) => {

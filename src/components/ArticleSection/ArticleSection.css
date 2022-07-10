@@ -1,8 +1,6 @@
 .results {
   padding: 32px 16px 24px;
   background-color: rgb(245, 246, 247);
-  /* position: relative; */
-  /* min-height: 282px; */
 }
 
 .results__title {
