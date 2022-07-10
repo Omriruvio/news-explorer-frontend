@@ -2,7 +2,7 @@ import './ShowMoreButton.css';
 
 const ShowMoreButton = ({ getNextCards }) => {
   return (
-    <button type={'button'} className="search-results__show-more-button" onClick={getNextCards}>
+    <button type={'button'} className="show-more" onClick={getNextCards}>
       Show more
     </button>
   );

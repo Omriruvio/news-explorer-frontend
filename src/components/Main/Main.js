@@ -11,11 +11,17 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { popupActions } from '../../reducers/popupReducer';
 import { useAuth } from '../../contexts/AuthContext';
 import AuthForm from '../AuthForm/AuthForm';
+import { useState } from 'react';
+import NothingFound from '../NothingFound/NothingFound';
 
 const Main = () => {
   const isMobileSized = useWindowSize().width < 650;
   const [popupState, popupDispatch] = usePopups();
   const { signIn } = useAuth();
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+  const [nothingFound, setNothingFound] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const showSignUp = () => {
     popupDispatch(popupActions.closeAll);
@@ -36,6 +42,23 @@ const Main = () => {
     // temporary - pre APIs
     signIn('Elise');
     popupDispatch(popupActions.closeSignInPopup);
+  };
+
+  const handleSearchSubmit = (results) => {
+    // temporarily mocking search results
+    setIsSearching(true);
+    setNothingFound(false);
+    setSearchResults([]);
+    new Promise((resolve) => {
+      setTimeout(resolve, 1500);
+    }).then(() => {
+      if (!results || results.length === 0) {
+        setNothingFound(true);
+      } else {
+        setSearchResults(results);
+      }
+      setIsSearching(false);
+    });
   };
 
   return (
@@ -76,9 +99,10 @@ const Main = () => {
         <Header />
         {popupState.isUserMenuOpen && isMobileSized && <UserMenu />}
         <PageTitle />
-        <SearchForm />
+        <SearchForm handleSearch={handleSearchSubmit} />
       </div>
-      <SearchResults />
+      {nothingFound && <NothingFound />}
+      <SearchResults isSearching={isSearching} searchResults={searchResults} />
       <AboutMe />
     </>
   );

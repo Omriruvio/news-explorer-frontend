@@ -1,4 +1,4 @@
-.search-results__show-more-button {
+.show-more {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,20 +20,20 @@
   line-height: 24px;
 }
 
-.search-results__show-more-button:hover {
+.show-more:hover {
   background-color: #e8e8e8;
   opacity: 0.9;
 }
 
 @media screen and (min-width: 650px) {
-  .search-results__show-more-button {
+  .show-more {
     max-width: 240px;
-    margin: 32px auto 40px;
+    margin: 32px auto 16px;
   }
 }
 @media screen and (min-width: 999px) {
-  .search-results__show-more-button {
+  .show-more {
     max-width: 288px;
-    margin: 64px auto 80px;
+    margin: 64px auto 56px;
   }
 }

@@ -1,5 +1,10 @@
-.preloader {
+.preloader_container {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   min-height: 282px;
   background-color: #f5f6f7;
@@ -11,17 +16,18 @@
   height: 74px;
   border: 4px solid #444;
   border-bottom-color: #888;
-
   border-radius: 50%;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-
   animation: spin 0.75s infinite linear;
+}
+
+.preloader__text {
+  top: 98px;
+  text-align: center;
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #b6bcbf;
 }
 
 @keyframes spin {
