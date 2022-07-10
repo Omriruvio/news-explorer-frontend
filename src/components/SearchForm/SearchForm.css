@@ -25,6 +25,7 @@
 }
 
 .search-form__submit {
+  padding: 0;
   font-family: Roboto, sans-serif;
   font-size: 18px;
   font-weight: 500;
@@ -38,6 +39,21 @@
   margin: auto;
   background-color: #2f71e5;
   color: #fff;
+  box-shadow: 0px 5px 15px rgba(14, 26, 57, 0.2);
+  transition: background 0.3s ease;
+}
+
+.search-form__submit:hover {
+  background-color: #347eff;
+}
+
+.search-form__submit:active {
+  background-color: #2a65cc;
+}
+
+.search-form__submit:disabled {
+  background-color: #e6e8eb;
+  color: #b6bcbf;
 }
 
 @media screen and (min-width: 650px) {

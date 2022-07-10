@@ -14,10 +14,13 @@ const PopupWithForm = (props) => {
       popupDispatch(popupActions.closeAll);
     }
   };
+
   const handleSubmit = (e) => {
+    // Temporary, pre API handler
     e.preventDefault();
     onSubmit();
   };
+
   return (
     <div onMouseDown={handleClick} className={`popup popup_type_${name} ${isOpen ? 'popup_active' : ''}`}>
       <div className="popup__window">

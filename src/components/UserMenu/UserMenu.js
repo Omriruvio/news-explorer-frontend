@@ -14,7 +14,7 @@ const UserMenu = ({ isDark }) => {
   const routeToPath = isSavedArticles ? '/' : '/saved-articles';
   const displayPath = isSavedArticles ? 'Home' : 'Saved Articles';
 
-  const handleOverlayClick = (event) => {
+  const handleOverlayClick = () => {
     popupDispatch(popupActions.closeUserMenu);
   };
 

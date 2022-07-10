@@ -35,8 +35,18 @@
   align-items: center;
 }
 
+.label-button:hover .label-icon {
+  opacity: 0.7;
+}
+
 .label-popup {
   padding: 11px 26px;
+  clip-path: polygon(100% 0, 100% 0%, 100% 100%, 100% 100%);
+  transition: clip-path 0.3s ease-out;
+}
+
+.label-container_right:hover .label-popup {
+  clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
 }
 
 .label-popup.label-text {

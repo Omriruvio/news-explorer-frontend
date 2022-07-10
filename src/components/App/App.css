@@ -3,3 +3,11 @@
   margin: auto;
   color: #1a1b22;
 }
+
+.hover-fade {
+  transition: opacity 0.3s ease;
+}
+
+.hover-fade:hover {
+  opacity: 0.6;
+}

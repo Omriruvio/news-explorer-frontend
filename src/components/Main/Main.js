@@ -16,23 +16,28 @@ const Main = () => {
   const isMobileSized = useWindowSize().width < 650;
   const [popupState, popupDispatch] = usePopups();
   const { signIn } = useAuth();
+
   const showSignUp = () => {
     popupDispatch(popupActions.closeAll);
     popupDispatch(popupActions.openSignUpPopup);
   };
+
   const showSignIn = () => {
     popupDispatch(popupActions.closeAll);
     popupDispatch(popupActions.openSignInPopup);
   };
+
   const handleSignup = () => {
     popupDispatch(popupActions.openSuccessPopup);
     popupDispatch(popupActions.closeSignUpPopup);
   };
+
   const handleSignin = () => {
     // temporary - pre APIs
     signIn('Elise');
     popupDispatch(popupActions.closeSignInPopup);
   };
+
   return (
     <>
       <PopupWithForm

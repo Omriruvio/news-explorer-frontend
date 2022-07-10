@@ -16,7 +16,7 @@ const NewsCard = ({ alt, src, date, header, text, source, link }) => {
             {text}
           </blockquote>
         </div>
-        <a className="news-card__ref" href={link}>
+        <a className="news-card__ref hover-fade" href={link}>
           {source}
         </a>
       </article>
