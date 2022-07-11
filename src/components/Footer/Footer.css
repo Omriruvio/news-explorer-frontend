@@ -46,6 +46,11 @@
   color: inherit;
 }
 
+.footer__page-link a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .footer__copyright {
   font-size: 14px;
   font-weight: 400;

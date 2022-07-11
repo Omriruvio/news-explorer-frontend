@@ -4,16 +4,16 @@ const PopupContext = createContext();
 PopupContext.displayName = 'Popups';
 
 export const popupActions = {
-  closeAll: { type: 'close all popups' },
-  openUserMenu: { type: 'open user menu' },
-  closeUserMenu: { type: 'close user menu' },
-  toggleUserMenu: { type: 'toggle user menu' },
-  closeSignInPopup: { type: 'close signin popup' },
-  openSignInPopup: { type: 'open signin popup' },
-  openSignUpPopup: { type: 'open signup popup' },
-  closeSignUpPopup: { type: 'close signup popup' },
-  openSuccessPopup: { type: 'open success popup' },
-  closeSuccessPopup: { type: 'close success popup' },
+  closeAll: 'close all popups',
+  openUserMenu: 'open user menu',
+  closeUserMenu: 'close user menu',
+  toggleUserMenu: 'toggle user menu',
+  closeSignInPopup: 'close signin popup',
+  openSignInPopup: 'open signin popup',
+  openSignUpPopup: 'open signup popup',
+  closeSignUpPopup: 'close signup popup',
+  openSuccessPopup: 'open success popup',
+  closeSuccessPopup: 'close success popup',
 };
 
 export const usePopups = () => useContext(PopupContext);

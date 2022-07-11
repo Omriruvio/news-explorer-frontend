@@ -8,7 +8,7 @@ const Logo = () => {
   const locationIsArticles = useLocation().pathname === '/saved-articles';
   const linkStyle = `logo-text logo-text_${locationIsArticles ? 'dark' : 'light'}`;
   return (
-    <Link onClick={() => popupReducer(popupActions.closeAll)} style={{ textDecoration: 'none', color: 'inherit' }} to="/">
+    <Link onClick={() => popupReducer(popupActions.closeAll)} to="/">
       <span className={linkStyle}>NewsExplorer</span>
     </Link>
   );

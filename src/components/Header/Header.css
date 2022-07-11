@@ -10,6 +10,11 @@
   border-bottom: #ffffff33 1px solid;
 }
 
+.header > a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .header_dark {
   background-color: #1a1b22;
 }

@@ -40,22 +40,11 @@
   justify-content: center;
   visibility: hidden;
   opacity: 0;
-  /* transition: visibility 0.7s, opacity 0.7s linear; */
 }
 
 .popup_active {
   visibility: visible;
   opacity: 1;
-  /* transition: visibility 0.7s, opacity 0.7s; */
-}
-
-.popup:not(.popup_active) {
-  /* animation out */
-  transition: visibility 0.8s, opacity 0.8s;
-}
-.popup.popup_active {
-  /* animation in */
-  transition: visibility 0.4s, opacity 0.4s;
 }
 
 .popup__window {

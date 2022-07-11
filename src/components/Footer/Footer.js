@@ -11,9 +11,7 @@ const Footer = () => {
       <nav className="footer__nav-wrapper">
         <ul className="footer__page-links">
           <li className="footer__page-link hover-fade">
-            <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>
-              Home
-            </Link>
+            <Link to={'/'}>Home</Link>
           </li>
           <li>
             <a className="footer__page-link hover-fade" href="https://omriruvio.com" target={'_blank'} rel="noreferrer">
