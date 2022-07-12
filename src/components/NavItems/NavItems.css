@@ -18,12 +18,9 @@
 
 .navbar__link_dark {
   color: #1a1b22;
-}
-
-.navbar__link_active_dark {
   border-bottom: #1a1b22 3px solid;
 }
 
-.navbar__link_active_light {
+.navbar__link_light {
   border-bottom: #ffffff 3px solid;
 }

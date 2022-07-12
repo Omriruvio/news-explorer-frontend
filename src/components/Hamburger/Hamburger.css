@@ -23,3 +23,11 @@
 .hamburger_dark {
   background-image: url('../../images/burger-black.svg');
 }
+
+.cross-button_light {
+  background-image: url('../../images/close.svg');
+}
+
+.hamburger_light {
+  background-image: url('../../images/burger.svg');
+}

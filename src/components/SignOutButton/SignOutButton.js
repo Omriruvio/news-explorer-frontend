@@ -6,12 +6,14 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useLocation } from 'react-router';
 
 const SignOutButton = ({ inUserMenu }) => {
-  const [, popupDispatch] = usePopups();
+  const [popupState, popupDispatch] = usePopups();
   const { currentUser, signOut } = useAuth();
   const inSavedNews = useLocation().pathname === '/saved-articles';
   const userName = currentUser.name;
-  const wrapperClassName = `navbar__sign-out-wrapper ${inUserMenu ? 'navbar__sign-out-wrapper_type_menu' : ''}`;
-  const buttonClassName = `navbar__sign-out-button ${inSavedNews ? 'navbar__sign-out-button_type_saved-news' : ''}`;
+  const wrapperClassName = `navbar__sign-out-wrapper ${
+    inUserMenu ? 'navbar__sign-out-wrapper_type_menu' : !inSavedNews ? 'navbar__sign-out-wrapper_type_main' : ''
+  }`;
+  const buttonClassName = `navbar__sign-out-button ${inSavedNews && !popupState.isUserMenuOpen ? 'navbar__sign-out-button_type_saved-news' : ''}`;
 
   const handleClick = () => {
     signOut();
@@ -21,7 +23,7 @@ const SignOutButton = ({ inUserMenu }) => {
   return (
     <li onClick={handleClick} className={wrapperClassName}>
       <button className={buttonClassName}>{userName}</button>
-      <img className={'navbar__sign-out-icon'} alt="Sign out icon" src={inSavedNews ? signOutIcon : signOutIconWhite} />
+      <img className={'navbar__sign-out-icon'} alt="Sign out icon" src={inSavedNews && !popupState.isUserMenuOpen ? signOutIcon : signOutIconWhite} />
     </li>
   );
 };

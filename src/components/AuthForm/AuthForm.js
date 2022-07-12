@@ -10,7 +10,7 @@ const AuthForm = ({ formName, onSubmit, buttonText, withNameField, responseError
   };
 
   return (
-    <form onSubmit={handleSubmit} className={`form form_${formName}`} name={formName}>
+    <form onSubmit={handleSubmit} className="form" name={formName}>
       <div className="form__inputs-wrapper">
         <label className="form__label">
           Email

@@ -1,19 +1,16 @@
 import './Hamburger.css';
 import { usePopups, popupActions } from '../../contexts/PopupContext';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation } from 'react-router';
 
 const Hamburger = () => {
-  const locationIsArticles = useLocation().pathname === '/saved-articles';
-  const burgerClassName = `hamburger ${locationIsArticles ? 'hamburger_dark' : ''}`;
-  const crossClassName = `cross-button ${locationIsArticles ? 'cross-button_dark' : ''}`;
   const [popupState, popupDispatch] = usePopups();
+  const locationIsArticles = useLocation().pathname === '/saved-articles';
+  const burgerClassName = `hamburger ${locationIsArticles && !popupState.isUserMenuOpen ? 'hamburger_dark' : 'hamburger_light'}`;
+  const crossClassName = `cross-button ${locationIsArticles && !popupState.isUserMenuOpen ? 'cross-button_dark' : 'cross-button_light'}`;
   const displayButton = () => (popupState.isUserMenuOpen ? crossClassName : burgerClassName);
-  const navigate = useNavigate();
 
   const handleBurgerClick = () => {
-    if (!locationIsArticles) {
-      popupDispatch(popupActions.toggleUserMenu);
-    } else navigate('/', { replace: true });
+    popupDispatch(popupActions.toggleUserMenu);
   };
 
   return <button onClick={handleBurgerClick} className={displayButton()}></button>;

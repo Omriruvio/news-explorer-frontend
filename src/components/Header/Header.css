@@ -19,6 +19,10 @@
   background-color: #1a1b22;
 }
 
+.header_light {
+  background-color: #1a1b22;
+}
+
 @media screen and (min-width: 650px) {
   .header {
     height: 66px;

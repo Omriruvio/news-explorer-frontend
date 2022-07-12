@@ -14,7 +14,7 @@ const Header = () => {
   const isSavedArticles = useLocation().pathname === '/saved-articles';
 
   useEffect(() => {
-    if (isMobileSized && !isSavedArticles) {
+    if (isMobileSized) {
       setHeaderClassName(`header ${popupState.isUserMenuOpen ? 'header_dark' : ''}`);
     } else {
       setHeaderClassName('header');

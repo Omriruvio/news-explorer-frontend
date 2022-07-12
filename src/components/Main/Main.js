@@ -100,7 +100,7 @@ const Main = () => {
           handleRedirect={showSignIn}
         ></PopupWithForm>
       )}
-      <section className="main__wrapper">
+      <section className="main">
         <Header />
         {popupState.isUserMenuOpen && isMobileSized && <UserMenu />}
         <PageTitle />

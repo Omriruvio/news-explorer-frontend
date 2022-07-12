@@ -21,7 +21,7 @@ const UserMenu = () => {
     <>
       <ul className="user-menu">
         <NavItem noDecoration text={displayPath} path={routeToPath} />
-        {currentUser.isLoggedIn ? <SignOutButton inUserMenu /> : !isSavedArticles && <SignInButton inUserMenu />}
+        {currentUser.isLoggedIn ? <SignOutButton inUserMenu /> : <SignInButton inUserMenu />}
       </ul>
       <div onClick={handleOverlayClick} className="user-menu__overlay"></div>
     </>
