@@ -1,0 +1,26 @@
+.main {
+  background: url('../../images/main-bg-mobile.png') no-repeat;
+  position: relative;
+}
+
+@media screen and (min-width: 321px) {
+  .main {
+    background: url('../../images/main-bg.png') no-repeat;
+    background-position: top center;
+  }
+}
+
+@media screen and (min-width: 650px) {
+  .main {
+    background: url('../../images/main-bg.png') no-repeat;
+    background-position: top center;
+    background-size: auto 400px;
+  }
+}
+
+@media screen and (min-width: 999px) {
+  .main {
+    background-position: top center;
+    background-size: auto;
+  }
+}

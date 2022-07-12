@@ -1,0 +1,43 @@
+.user-menu__overlay {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.5;
+}
+
+.user-menu {
+  background-color: #1a1b22;
+  color: #ffffff;
+  padding: 16px 16px 24px 16px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 2;
+  gap: 22px;
+  width: 100%;
+}
+
+.user-menu .navbar__link {
+  line-height: 56px;
+  font-size: 18px;
+}
+
+.user-menu .navbar__text_with-large-bubble {
+  width: 288px;
+}
+
+.user-menu .navbar__text_with-bubble::after {
+  top: 0;
+  left: 0;
+  min-width: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}

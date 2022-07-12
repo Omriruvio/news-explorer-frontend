@@ -1,0 +1,65 @@
+.saved-articles-info {
+  background-color: #fff;
+  font-family: Roboto, sans-serif;
+  padding: 8px 16px 32px;
+}
+
+.saved-articles-info__header {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #1a1b2280;
+  margin: 0 0 16px;
+}
+
+.saved-articles-info__article-count {
+  display: block;
+  font-family: Roboto-slab, sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 34px;
+  margin-bottom: 50px;
+}
+
+.saved-articles-info__keywords {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.saved-articles-info__keywords_bold {
+  font-weight: 700;
+}
+
+@media screen and (min-width: 650px) {
+  .saved-articles-info {
+    padding: 24px 40px 32px;
+  }
+
+  .saved-articles-info__header {
+    font-size: 14px;
+  }
+
+  .saved-articles-info__article-count {
+    max-width: 336px;
+    margin-bottom: 16px;
+  }
+}
+
+@media screen and (min-width: 999px) {
+  .saved-articles-info {
+    padding: 40px 104px 56px;
+  }
+
+  .saved-articles-info__header {
+    font-size: 18px;
+    margin-bottom: 28px;
+  }
+
+  .saved-articles-info__article-count {
+    margin-bottom: 30px;
+    font-size: 40px;
+    line-height: 46px;
+    max-width: 530px;
+  }
+}

@@ -1,0 +1,12 @@
+.navbar {
+  display: flex;
+  height: 100%;
+  color: #ffffff;
+  gap: 16px;
+}
+
+@media screen and (min-width: 999px) {
+  .navbar {
+    gap: 32px;
+  }
+}

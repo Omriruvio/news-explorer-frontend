@@ -1,0 +1,26 @@
+.navbar__list {
+  display: inherit;
+  gap: inherit;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar__link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+}
+
+.navbar__link_dark {
+  color: #1a1b22;
+  border-bottom: #1a1b22 3px solid;
+}
+
+.navbar__link_light {
+  border-bottom: #ffffff 3px solid;
+}

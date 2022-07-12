@@ -1,0 +1,38 @@
+.header {
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0 16px;
+  position: relative;
+  z-index: 2;
+  border-bottom: #ffffff33 1px solid;
+}
+
+.header > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.header_dark {
+  background-color: #1a1b22;
+}
+
+.header_light {
+  background-color: #1a1b22;
+}
+
+@media screen and (min-width: 650px) {
+  .header {
+    height: 66px;
+    padding: 0 40px;
+  }
+}
+
+@media screen and (min-width: 999px) {
+  .header {
+    height: 80px;
+    padding: 0 104px;
+  }
+}

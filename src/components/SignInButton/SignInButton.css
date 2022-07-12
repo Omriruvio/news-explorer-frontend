@@ -1,0 +1,38 @@
+.navbar__sign-in-wrapper {
+  cursor: pointer;
+  display: block;
+  min-height: 40px;
+  min-width: 152px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fff;
+  border-radius: 100px;
+  align-self: center;
+}
+
+.navbar__sign-in-wrapper_type_menu {
+  width: 100%;
+  min-height: 56px;
+}
+
+.navbar__sign-in-button {
+  background: none;
+  border: none;
+  color: inherit;
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 999px) {
+  .navbar__sign-in-wrapper {
+    min-width: 176px;
+    min-height: 48px;
+  }
+
+  .navbar__sign-in-button {
+    font-size: 18px;
+  }
+}
