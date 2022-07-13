@@ -2,7 +2,7 @@ import './SearchForm.css';
 import { newsApi } from '../../utils/NewsApi';
 import { useState } from 'react';
 
-const SearchForm = ({ buttonText = 'Search', handleSearch }) => {
+const SearchForm = ({ buttonText = 'Search', handleSearch, setIsSearching }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [placeholder, setPlaceholder] = useState('Enter topic');
   const [inputClassName, setInputClassName] = useState('search-form__input');
@@ -22,17 +22,20 @@ const SearchForm = ({ buttonText = 'Search', handleSearch }) => {
       return;
     }
 
+    setIsSearching(true);
+
     newsApi
       .getNewsByQuery(searchQuery)
       .then((res) => {
         const { articles } = res;
-        handleSearch(articles);
+        handleSearch(articles, searchQuery);
       })
       .catch((err) => console.log(err))
       .finally(() => {
         setSearchQuery('');
         setPlaceholder('Enter topic');
         setInputClassName('search-form__input');
+        setIsSearching(false);
       });
   };
 

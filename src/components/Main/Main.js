@@ -10,7 +10,7 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { usePopups, popupActions } from '../../contexts/PopupContext';
 import { useAuth } from '../../contexts/AuthContext';
 import AuthForm from '../AuthForm/AuthForm';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import NothingFound from '../NothingFound/NothingFound';
 import { mainApi } from '../../utils/MainApi.ts';
 
@@ -20,6 +20,7 @@ const Main = () => {
   const { signIn } = useAuth();
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState();
   const [nothingFound, setNothingFound] = useState(false);
   const [responseError, setResponseError] = useState(null);
 
@@ -62,22 +63,37 @@ const Main = () => {
       });
   };
 
-  const handleSearchSubmit = (results) => {
-    // temporarily mocking search results
-    setIsSearching(true);
+  const handleSearchSubmit = (results, keyword) => {
+    setSearchKeyword(keyword);
     setNothingFound(false);
     setSearchResults([]);
-    new Promise((resolve) => {
-      setTimeout(resolve, 1500);
-    }).then(() => {
-      if (!results || results.length === 0) {
-        setNothingFound(true);
-      } else {
-        setSearchResults(results);
-      }
-      setIsSearching(false);
-    });
+    if (!results || results.length === 0) {
+      setNothingFound(true);
+    } else {
+      setSearchResults(results);
+      localStorage.setItem('searchResults', JSON.stringify({ keyword, results }));
+    }
   };
+
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      mainApi.setUserToken(JSON.parse(jwt));
+      mainApi
+        .getCurrentUser()
+        .then((user) => {
+          signIn(user.name);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          const { keyword, results } = JSON.parse(localStorage.getItem('searchResults'));
+          if (results) {
+            setSearchResults(results);
+            setSearchKeyword(keyword);
+          }
+        });
+    }
+  }, [signIn]);
 
   return (
     <>
@@ -126,10 +142,10 @@ const Main = () => {
         <Header />
         {popupState.isUserMenuOpen && isMobileSized && <UserMenu />}
         <PageTitle />
-        <SearchForm handleSearch={handleSearchSubmit} />
+        <SearchForm handleSearch={handleSearchSubmit} setIsSearching={setIsSearching} />
       </section>
       {nothingFound && <NothingFound />}
-      <SearchResults isSearching={isSearching} searchResults={searchResults} />
+      <SearchResults keyword={searchKeyword} isSearching={isSearching} searchResults={searchResults} />
       <AboutMe />
     </>
   );

@@ -1,20 +1,23 @@
 import './SearchResults.css';
 import NewsCard from '../NewsCard/NewsCard';
 import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Preloader from '../Preloader/Preloader';
 import ArticleSection from '../ArticleSection/ArticleSection';
 
-const SearchResults = ({ isSearching, searchResults }) => {
+const SearchResults = ({ isSearching, searchResults, keyword }) => {
   const [displaySets, setDisplaySets] = useState(0);
   const [displayCards, setDisplayCards] = useState([]);
 
-  const getDisplayCards = (cardArray, count = 1, size = 3) => {
-    const lastIndex = count * size - 1;
-    const cardsToDisplay = cardArray.slice(0, lastIndex + 1);
-    // TODO - replace key with unique card id
-    return cardsToDisplay.map((card, i) => <NewsCard key={i} {...card}></NewsCard>);
-  };
+  const getDisplayCards = useCallback(
+    (cardArray, count = 1, size = 3) => {
+      const lastIndex = count * size - 1;
+      const cardsToDisplay = cardArray.slice(0, lastIndex + 1);
+      // TODO - replace key with unique card id
+      return cardsToDisplay.map((card, i) => <NewsCard key={i} keyword={keyword} {...card}></NewsCard>);
+    },
+    [keyword]
+  );
 
   const handleGetNextCards = () => {
     const nextThree = getDisplayCards(searchResults, displaySets + 1);
@@ -30,7 +33,7 @@ const SearchResults = ({ isSearching, searchResults }) => {
       setDisplayCards(newCards);
       setDisplaySets(1);
     }
-  }, [searchResults]);
+  }, [searchResults, getDisplayCards]);
 
   return (
     <>

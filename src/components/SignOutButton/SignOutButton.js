@@ -17,13 +17,14 @@ const SignOutButton = ({ inUserMenu }) => {
 
   const handleClick = () => {
     signOut();
+    localStorage.removeItem('jwt');
     popupDispatch(popupActions.closeUserMenu);
   };
 
   return (
     <li onClick={handleClick} className={wrapperClassName}>
       <button className={buttonClassName}>{userName}</button>
-      <img className={'navbar__sign-out-icon'} alt="Sign out icon" src={inSavedNews && !popupState.isUserMenuOpen ? signOutIcon : signOutIconWhite} />
+      <img className={'navbar__sign-out-icon'} alt='Sign out icon' src={inSavedNews && !popupState.isUserMenuOpen ? signOutIcon : signOutIconWhite} />
     </li>
   );
 };

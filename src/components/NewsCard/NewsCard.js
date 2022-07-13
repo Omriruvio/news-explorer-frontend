@@ -2,13 +2,13 @@ import './NewsCard.css';
 import CardLabel from '../CardLabel/CardLabel';
 import { parseDate } from '../../utils/parseDate';
 
-const NewsCard = ({ author, content, title, description, publishedAt, url, urlToImage, source: { id, name } }) => {
+const NewsCard = ({ keyword, isSaved, /* author, content, */ title, description, publishedAt, url, urlToImage, source: { /* id, */ name } }) => {
   return (
     <li>
       <article className='news-card'>
         <div className='news-card__image-container'>
-          <CardLabel />
-          <a href={url}>
+          <CardLabel text={keyword} isSaved={isSaved} />
+          <a href={url} target={'_blank'} rel='noreferrer'>
             <img className='news-card__image' src={urlToImage} alt={title}></img>
           </a>
         </div>
