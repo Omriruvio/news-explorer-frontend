@@ -12,6 +12,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import AuthForm from '../AuthForm/AuthForm';
 import { useState } from 'react';
 import NothingFound from '../NothingFound/NothingFound';
+import { mainApi } from '../../utils/MainApi.ts';
 
 const Main = () => {
   const isMobileSized = useWindowSize().width < 650;
@@ -20,26 +21,45 @@ const Main = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [nothingFound, setNothingFound] = useState(false);
+  const [responseError, setResponseError] = useState(null);
 
   const showSignUp = () => {
+    setResponseError(null);
     popupDispatch(popupActions.closeAll);
     popupDispatch(popupActions.openSignUpPopup);
   };
 
   const showSignIn = () => {
+    setResponseError(null);
     popupDispatch(popupActions.closeAll);
     popupDispatch(popupActions.openSignInPopup);
   };
 
-  const handleSignup = () => {
-    popupDispatch(popupActions.openSuccessPopup);
-    popupDispatch(popupActions.closeSignUpPopup);
+  const handleSignup = ({ email, password, username }) => {
+    mainApi
+      .userSignup(email, password, username)
+      .then((user) => {
+        popupDispatch(popupActions.openSuccessPopup);
+        popupDispatch(popupActions.closeSignUpPopup);
+      })
+      .catch((err) => {
+        console.log(err.statusText);
+        setResponseError(err.statusText);
+      });
   };
 
-  const handleSignin = () => {
-    // temporary - pre APIs
-    signIn('Elise');
-    popupDispatch(popupActions.closeSignInPopup);
+  const handleSignin = ({ email, password }) => {
+    mainApi
+      .userSignin(email, password)
+      .then((user) => {
+        signIn(user.name);
+        localStorage.setItem('jwt', JSON.stringify(user.token));
+        popupDispatch(popupActions.closeSignInPopup);
+      })
+      .catch((err) => {
+        console.log(err.statusText);
+        setResponseError(err.statusText);
+      });
   };
 
   const handleSearchSubmit = (results) => {
@@ -66,11 +86,12 @@ const Main = () => {
           isOpen={popupState.isSigninPopupOpen}
           onSubmit={handleSignin}
           isValid={true}
-          formName="signin"
-          title="Sign in"
-          buttonText="Sign in"
-          redirectText="Sign up"
+          formName='signin'
+          title='Sign in'
+          buttonText='Sign in'
+          redirectText='Sign up'
           handleRedirect={showSignUp}
+          responseError={responseError}
         >
           <AuthForm />
         </PopupWithForm>
@@ -81,11 +102,12 @@ const Main = () => {
           isOpen={popupState.isSignupPopupOpen}
           onSubmit={handleSignup}
           isValid={true}
-          formName="signup"
-          title="Sign up"
-          buttonText="Sign up"
-          redirectText="Sign in"
+          formName='signup'
+          title='Sign up'
+          buttonText='Sign up'
+          redirectText='Sign in'
           handleRedirect={showSignIn}
+          responseError={responseError}
         >
           <AuthForm />
         </PopupWithForm>
@@ -93,14 +115,14 @@ const Main = () => {
       {popupState.isSuccessPopupOpen && (
         <PopupWithForm
           hideForm={true}
-          formName="success"
+          formName='success'
           isOpen={popupState.isSuccessPopupOpen}
-          title="Registration successfully completed!"
-          redirectText="Sign in"
+          title='Registration successfully completed!'
+          redirectText='Sign in'
           handleRedirect={showSignIn}
         ></PopupWithForm>
       )}
-      <section className="main">
+      <section className='main'>
         <Header />
         {popupState.isUserMenuOpen && isMobileSized && <UserMenu />}
         <PageTitle />

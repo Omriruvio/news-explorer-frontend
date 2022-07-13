@@ -4,22 +4,36 @@ import { useState } from 'react';
 
 const SearchForm = ({ buttonText = 'Search', handleSearch }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [placeholder, setPlaceholder] = useState('Enter topic');
+  const [inputClassName, setInputClassName] = useState('search-form__input');
 
-  const handleInput = event => {
+  const handleInput = (event) => {
     const { value } = event.target;
+    setPlaceholder('Enter topic');
+    setInputClassName('search-form__input');
     setSearchQuery(value);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    if (!searchQuery) {
+      setPlaceholder('Please enter a keyword.');
+      setInputClassName('search-form__input search-form__input_error');
+      return;
+    }
+
     newsApi
       .getNewsByQuery(searchQuery)
-      .then(res => {
+      .then((res) => {
         const { articles } = res;
         handleSearch(articles);
       })
-      .catch(err => console.log(err));
-    setSearchQuery('');
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setSearchQuery('');
+        setPlaceholder('Enter topic');
+        setInputClassName('search-form__input');
+      });
   };
 
   return (
@@ -28,9 +42,9 @@ const SearchForm = ({ buttonText = 'Search', handleSearch }) => {
         onChange={handleInput}
         value={searchQuery || ''}
         name='search'
-        className='search-form__input'
+        className={inputClassName}
         type={'search'}
-        placeholder='Enter topic'
+        placeholder={placeholder}
       ></input>
       <button className='search-form__submit' type={'submit'}>
         {buttonText}

@@ -17,7 +17,6 @@ const SearchResults = ({ isSearching, searchResults }) => {
   };
 
   const handleGetNextCards = () => {
-    // temporarily displaying mock data
     const nextThree = getDisplayCards(searchResults, displaySets + 1);
     setDisplayCards(nextThree);
     setDisplaySets(displaySets + 1);
@@ -38,9 +37,9 @@ const SearchResults = ({ isSearching, searchResults }) => {
       {isSearching && <Preloader text={` Searching for news...`} />}
       {displaySets !== 0 && (
         <ArticleSection>
-          {displaySets !== 0 && <h2 className="results__title">Search results</h2>}
-          <ul className="results__article-container">{displayCards}</ul>
-          {!isSearching && <ShowMoreButton getNextCards={handleGetNextCards} />}
+          {displaySets !== 0 && <h2 className='results__title'>Search results</h2>}
+          <ul className='results__article-container'>{displayCards}</ul>
+          {!isSearching && displayCards.length < searchResults.length && <ShowMoreButton getNextCards={handleGetNextCards} />}
         </ArticleSection>
       )}
     </>
