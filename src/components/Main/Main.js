@@ -13,8 +13,9 @@ import AuthForm from '../AuthForm/AuthForm';
 import { useState, useEffect } from 'react';
 import NothingFound from '../NothingFound/NothingFound';
 import { mainApi } from '../../utils/MainApi.ts';
+import ConnectionError from '../ConnectionError/ConnectionError';
 
-const Main = ({ savedCards }) => {
+const Main = ({ savedCards, handleBookmark }) => {
   const isMobileSized = useWindowSize().width < 650;
   const [popupState, popupDispatch] = usePopups();
   const { signIn } = useAuth();
@@ -22,6 +23,7 @@ const Main = ({ savedCards }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState();
   const [nothingFound, setNothingFound] = useState(false);
+  const [connectionError, setConnectionError] = useState(false);
   const [responseError, setResponseError] = useState(null);
 
   const showSignUp = () => {
@@ -142,10 +144,17 @@ const Main = ({ savedCards }) => {
         <Header />
         {popupState.isUserMenuOpen && isMobileSized && <UserMenu />}
         <PageTitle />
-        <SearchForm handleSearch={handleSearchSubmit} setIsSearching={setIsSearching} />
+        <SearchForm connectionError={setConnectionError} handleSearch={handleSearchSubmit} setIsSearching={setIsSearching} />
       </section>
       {nothingFound && <NothingFound />}
-      <SearchResults savedCards={savedCards} keyword={searchKeyword} isSearching={isSearching} searchResults={searchResults} />
+      {connectionError && <ConnectionError />}
+      <SearchResults
+        handleBookmark={handleBookmark}
+        savedCards={savedCards}
+        keyword={searchKeyword}
+        isSearching={isSearching}
+        searchResults={searchResults}
+      />
       <AboutMe />
     </>
   );

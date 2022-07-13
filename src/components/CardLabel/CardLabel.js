@@ -23,6 +23,11 @@ const CardLabel = ({ text, isSaved, onBookmark, onTrashClick }) => {
       return;
     }
 
+    if (isSaved || newSaved) {
+      // remove bookmark logic here
+      return;
+    }
+
     onBookmark()
       .then(() => {
         setBookmarkIcon(bookmarkBlue);

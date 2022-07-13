@@ -2,7 +2,7 @@ import './SearchForm.css';
 import { newsApi } from '../../utils/NewsApi';
 import { useState } from 'react';
 
-const SearchForm = ({ buttonText = 'Search', handleSearch, setIsSearching }) => {
+const SearchForm = ({ connectionError, buttonText = 'Search', handleSearch, setIsSearching }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [placeholder, setPlaceholder] = useState('Enter topic');
   const [inputClassName, setInputClassName] = useState('search-form__input');
@@ -16,6 +16,7 @@ const SearchForm = ({ buttonText = 'Search', handleSearch, setIsSearching }) => 
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    connectionError(false);
     if (!searchQuery) {
       setPlaceholder('Please enter a keyword.');
       setInputClassName('search-form__input search-form__input_error');
@@ -30,7 +31,10 @@ const SearchForm = ({ buttonText = 'Search', handleSearch, setIsSearching }) => 
         const { articles } = res;
         handleSearch(articles, searchQuery);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        connectionError(true);
+        console.log(err);
+      })
       .finally(() => {
         setSearchQuery('');
         setPlaceholder('Enter topic');

@@ -6,7 +6,7 @@ import Preloader from '../Preloader/Preloader';
 import ArticleSection from '../ArticleSection/ArticleSection';
 import { mainApi } from '../../utils/MainApi.ts';
 
-const SearchResults = ({ savedCards, isSearching, searchResults, keyword }) => {
+const SearchResults = ({ handleBookmark, savedCards, isSearching, searchResults, keyword }) => {
   const [displaySets, setDisplaySets] = useState(0);
   const [displayCards, setDisplayCards] = useState([]);
 
@@ -45,7 +45,7 @@ const SearchResults = ({ savedCards, isSearching, searchResults, keyword }) => {
           {displaySets !== 0 && <h2 className='results__title'>Search results</h2>}
           <ul className='results__article-container'>
             {displayCards.map((card, i) => (
-              <NewsCard key={i} keyword={keyword} {...card}></NewsCard>
+              <NewsCard key={i} handleBookmark={handleBookmark} keyword={keyword} {...card}></NewsCard>
             ))}
           </ul>
           {!isSearching && displayCards.length < searchResults.length && <ShowMoreButton getNextCards={handleGetNextCards} />}

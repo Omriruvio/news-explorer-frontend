@@ -1,0 +1,36 @@
+.connection-error__container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 374px;
+  background-color: #f5f6f7;
+}
+
+.connection-error__image {
+  margin-bottom: 40px;
+  margin-top: 86px;
+  width: 74px;
+  height: 74px;
+}
+
+.connection-error__title {
+  font-family: Roboto-slab, sans-serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 30px;
+  margin-bottom: 16px;
+}
+
+.connection-error__text {
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #b6bcbf;
+  max-width: 253px;
+  text-align: center;
+  margin-bottom: 80px;
+}

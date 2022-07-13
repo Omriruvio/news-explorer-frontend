@@ -26,6 +26,21 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  const handleBookmark = (card) => {
+    const newCard = {
+      keyword: card.keyword,
+      title: card.title,
+      description: card.text,
+      publishedAt: card.date,
+      url: card.link,
+      urlToImage: card.image,
+      source: { name: card.source },
+      id: card._id,
+    };
+    // TODO- fix re-render on bookmarking card
+    setSavedCards([...savedCards, newCard]);
+  };
+
   useEffect(() => {
     const closeByEsc = (e) => {
       e.key === 'Escape' && popupDispatch(popupActions.closeAll);
@@ -61,7 +76,7 @@ function App() {
   return (
     <div className='app'>
       <Routes>
-        <Route path='/' element={<Main savedCards={savedCards} />} />
+        <Route path='/' element={<Main savedCards={savedCards} handleBookmark={handleBookmark} />} />
         <Route
           path='/saved-articles'
           element={
