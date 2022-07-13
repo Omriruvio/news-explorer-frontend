@@ -14,7 +14,7 @@ import { useState, useEffect } from 'react';
 import NothingFound from '../NothingFound/NothingFound';
 import { mainApi } from '../../utils/MainApi.ts';
 
-const Main = () => {
+const Main = ({ savedCards }) => {
   const isMobileSized = useWindowSize().width < 650;
   const [popupState, popupDispatch] = usePopups();
   const { signIn } = useAuth();
@@ -145,7 +145,7 @@ const Main = () => {
         <SearchForm handleSearch={handleSearchSubmit} setIsSearching={setIsSearching} />
       </section>
       {nothingFound && <NothingFound />}
-      <SearchResults keyword={searchKeyword} isSearching={isSearching} searchResults={searchResults} />
+      <SearchResults savedCards={savedCards} keyword={searchKeyword} isSearching={isSearching} searchResults={searchResults} />
       <AboutMe />
     </>
   );

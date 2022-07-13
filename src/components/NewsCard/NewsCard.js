@@ -1,13 +1,34 @@
 import './NewsCard.css';
 import CardLabel from '../CardLabel/CardLabel';
 import { parseDate } from '../../utils/parseDate';
+import { mainApi } from '../../utils/MainApi.ts';
 
-const NewsCard = ({ keyword, isSaved, /* author, content, */ title, description, publishedAt, url, urlToImage, source: { /* id, */ name } }) => {
+const NewsCard = ({ onTrashClick, ...card }) => {
+  const {
+    id,
+    keyword,
+    isSaved,
+    title,
+    description,
+    publishedAt,
+    url,
+    urlToImage,
+    source: { name },
+  } = card;
+
+  const handleBookmark = () => {
+    return mainApi.saveArticle({ date: publishedAt, image: urlToImage, keyword, link: url, source: name, text: description, title });
+  };
+
+  const handleTrashClick = () => {
+    onTrashClick(id);
+  };
+
   return (
     <li>
       <article className='news-card'>
         <div className='news-card__image-container'>
-          <CardLabel text={keyword} isSaved={isSaved} />
+          <CardLabel onTrashClick={handleTrashClick} onBookmark={handleBookmark} text={keyword} isSaved={isSaved} />
           <a href={url} target={'_blank'} rel='noreferrer'>
             <img className='news-card__image' src={urlToImage} alt={title}></img>
           </a>

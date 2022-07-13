@@ -4,26 +4,28 @@ import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
 import { useCallback, useEffect, useState } from 'react';
 import Preloader from '../Preloader/Preloader';
 import ArticleSection from '../ArticleSection/ArticleSection';
+import { mainApi } from '../../utils/MainApi.ts';
 
-const SearchResults = ({ isSearching, searchResults, keyword }) => {
+const SearchResults = ({ savedCards, isSearching, searchResults, keyword }) => {
   const [displaySets, setDisplaySets] = useState(0);
   const [displayCards, setDisplayCards] = useState([]);
-
-  const getDisplayCards = useCallback(
-    (cardArray, count = 1, size = 3) => {
-      const lastIndex = count * size - 1;
-      const cardsToDisplay = cardArray.slice(0, lastIndex + 1);
-      // TODO - replace key with unique card id
-      return cardsToDisplay.map((card, i) => <NewsCard key={i} keyword={keyword} {...card}></NewsCard>);
-    },
-    [keyword]
-  );
 
   const handleGetNextCards = () => {
     const nextThree = getDisplayCards(searchResults, displaySets + 1);
     setDisplayCards(nextThree);
     setDisplaySets(displaySets + 1);
   };
+
+  const getDisplayCards = useCallback(
+    (cardArray, count = 1, size = 3) => {
+      const lastIndex = count * size - 1;
+      const cardsToDisplay = cardArray.slice(0, lastIndex + 1).map((card) => {
+        return { ...card, isSaved: savedCards.some((savedCard) => savedCard.url === card.url) };
+      });
+      return cardsToDisplay;
+    },
+    [savedCards]
+  );
 
   useEffect(() => {
     setDisplaySets(0);
@@ -41,7 +43,11 @@ const SearchResults = ({ isSearching, searchResults, keyword }) => {
       {displaySets !== 0 && (
         <ArticleSection>
           {displaySets !== 0 && <h2 className='results__title'>Search results</h2>}
-          <ul className='results__article-container'>{displayCards}</ul>
+          <ul className='results__article-container'>
+            {displayCards.map((card, i) => (
+              <NewsCard key={i} keyword={keyword} {...card}></NewsCard>
+            ))}
+          </ul>
           {!isSearching && displayCards.length < searchResults.length && <ShowMoreButton getNextCards={handleGetNextCards} />}
         </ArticleSection>
       )}

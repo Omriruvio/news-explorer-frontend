@@ -9,56 +9,69 @@ import { useLocation } from 'react-router';
 import { useState } from 'react';
 import { usePopups, popupActions } from '../../contexts/PopupContext';
 
-const CardLabel = ({ text = 'Placeholder', isSaved }) => {
+const CardLabel = ({ text, isSaved, onBookmark, onTrashClick }) => {
   const isArticles = useLocation().pathname === '/saved-articles';
   const [trashIcon, setTrashIcon] = useState(trashButtonGrey);
+  const [newSaved, setNewSaved] = useState(false);
   const [bookmarkIcon, setBookmarkIcon] = useState(bookmarkGrey);
   const { currentUser } = useAuth();
   const [, popupDispatch] = usePopups();
 
   const handleBookmarkClick = () => {
-    if (!currentUser.isLoggedIn) popupDispatch(popupActions.openSignUpPopup);
+    if (!currentUser.isLoggedIn) {
+      popupDispatch(popupActions.openSignUpPopup);
+      return;
+    }
+
+    onBookmark()
+      .then(() => {
+        setBookmarkIcon(bookmarkBlue);
+        setNewSaved(true);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <>
       {!isArticles && (
-        <div className="label-contianer label-container_right">
-          <div className="label-container_popup">
-            <span className="label-popup label-text">{text}</span>
-          </div>
+        <div className='label-contianer label-container_right'>
+          {!currentUser.isLoggedIn && (
+            <div className='label-container_popup'>
+              <span className='label-popup label-text'>Sign in to save articles</span>
+            </div>
+          )}
           <button
             onClick={handleBookmarkClick}
-            onMouseEnter={() => !isSaved && setBookmarkIcon(bookmarkBlack)}
-            onMouseLeave={() => !isSaved && setBookmarkIcon(bookmarkGrey)}
-            className="label-button"
-            type="button"
+            onMouseEnter={() => !isSaved && !newSaved && setBookmarkIcon(bookmarkBlack)}
+            onMouseLeave={() => !isSaved && !newSaved && setBookmarkIcon(bookmarkGrey)}
+            className='label-button'
+            type='button'
           >
-            <img className="label-icon" src={isSaved ? bookmarkBlue : bookmarkIcon} alt={'Bookmark icon'}></img>
+            <img className='label-icon' src={isSaved ? bookmarkBlue : bookmarkIcon} alt={'Bookmark icon'}></img>
           </button>
         </div>
       )}
       {isArticles && (
         <>
-          <div className="label-contianer label-container_right">
-            <div className="label-container_popup">
-              <span className="label-popup label-text">Remove from saved</span>
+          <div className='label-contianer label-container_right'>
+            <div className='label-container_popup'>
+              <span className='label-popup label-text'>Remove from saved</span>
             </div>
             <button
-              /* onClick={handleTrashClick} */
+              onClick={onTrashClick}
               onMouseEnter={() => setTrashIcon(trashButtonBlack)}
               onMouseLeave={() => setTrashIcon(trashButtonGrey)}
-              className="label-button"
-              type="button"
+              className='label-button'
+              type='button'
             >
-              <img className="label-icon" src={trashIcon} alt={'Trash icon'}></img>
+              <img className='label-icon' src={trashIcon} alt={'Trash icon'}></img>
             </button>
           </div>
         </>
       )}
       {isArticles && (
-        <div className="label-contianer label-container_left">
-          <span className="label-text">{text}</span>
+        <div className='label-contianer label-container_left'>
+          <span className='label-text'>{text}</span>
         </div>
       )}
     </>
