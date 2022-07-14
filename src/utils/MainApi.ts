@@ -6,6 +6,7 @@ interface Article {
   source: string;
   link: string;
   image: string;
+  _id: string;
 }
 
 class MainApi {
@@ -38,7 +39,22 @@ class MainApi {
 
   getCurrentUser = () => this._fetch('/users/me', 'GET');
 
-  getUserArticles = () => this._fetch('/articles', 'GET');
+  getUserArticles = () => this._fetch('/articles', 'GET').then(this._convertCardFormat);
+
+  _convertCardFormat = (cards) => {
+    return cards.map((article: Article) => {
+      return {
+        keyword: article.keyword,
+        title: article.title,
+        description: article.text,
+        publishedAt: article.date,
+        url: article.link,
+        urlToImage: article.image,
+        source: { name: article.source },
+        id: article._id,
+      };
+    });
+  };
 
   setUserToken = (token: string) => (this._authToken = token);
 }

@@ -4,9 +4,8 @@ import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
 import { useCallback, useEffect, useState } from 'react';
 import Preloader from '../Preloader/Preloader';
 import ArticleSection from '../ArticleSection/ArticleSection';
-import { mainApi } from '../../utils/MainApi.ts';
 
-const SearchResults = ({ handleBookmark, savedCards, isSearching, searchResults, keyword }) => {
+const SearchResults = ({ handleBookmark, removeBookmark, savedCards, isSearching, searchResults, keyword }) => {
   const [displaySets, setDisplaySets] = useState(0);
   const [displayCards, setDisplayCards] = useState([]);
 
@@ -30,9 +29,8 @@ const SearchResults = ({ handleBookmark, savedCards, isSearching, searchResults,
   useEffect(() => {
     setDisplaySets(0);
     setDisplayCards([]);
-    if (searchResults.length !== 0) {
-      const newCards = getDisplayCards(searchResults);
-      setDisplayCards(newCards);
+    if (searchResults?.length !== 0) {
+      setDisplayCards(getDisplayCards(searchResults));
       setDisplaySets(1);
     }
   }, [searchResults, getDisplayCards]);
@@ -40,12 +38,12 @@ const SearchResults = ({ handleBookmark, savedCards, isSearching, searchResults,
   return (
     <>
       {isSearching && <Preloader text={` Searching for news...`} />}
-      {displaySets !== 0 && (
+      {!isSearching && displaySets !== 0 && (
         <ArticleSection>
           {displaySets !== 0 && <h2 className='results__title'>Search results</h2>}
           <ul className='results__article-container'>
             {displayCards.map((card, i) => (
-              <NewsCard key={i} handleBookmark={handleBookmark} keyword={keyword} {...card}></NewsCard>
+              <NewsCard key={i} removeBookmark={removeBookmark} handleBookmark={handleBookmark} keyword={keyword} {...card}></NewsCard>
             ))}
           </ul>
           {!isSearching && displayCards.length < searchResults.length && <ShowMoreButton getNextCards={handleGetNextCards} />}

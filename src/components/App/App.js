@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 import { usePopups, popupActions } from '../../contexts/PopupContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { useAuth } from '../../contexts/AuthContext';
-import NewsCard from '../NewsCard/NewsCard';
 import { mainApi } from '../../utils/MainApi.ts';
 
 function App() {
@@ -15,30 +14,19 @@ function App() {
   const { currentUser } = useAuth();
   const [savedCards, setSavedCards] = useState([]);
 
-  const handleTrashClick = (id) => {
-    console.log('remove card id: ', id);
-    mainApi
-      .deleteArticle(id)
-      .then(() => {
-        const newCards = savedCards.filter((card) => card.id !== id);
-        setSavedCards(newCards);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const handleBookmark = (card) => {
-    const newCard = {
-      keyword: card.keyword,
-      title: card.title,
-      description: card.text,
-      publishedAt: card.date,
-      url: card.link,
-      urlToImage: card.image,
-      source: { name: card.source },
-      id: card._id,
-    };
-    // TODO- fix re-render on bookmarking card
-    setSavedCards([...savedCards, newCard]);
+  const removeBookmark = (url) => {
+    const card = savedCards.find((card) => card.url === url);
+    if (card) {
+      mainApi
+        .deleteArticle(card.id)
+        .then(() => {
+          setSavedCards((oldCards) => oldCards.filter((card) => card.url !== url));
+        })
+        .catch((err) => console.log(err));
+    } else {
+      console.log('happens when card removed before making it to API');
+      setSavedCards((oldCards) => oldCards.filter((card) => card.url !== url));
+    }
   };
 
   useEffect(() => {
@@ -54,21 +42,7 @@ function App() {
       mainApi.setUserToken(JSON.parse(localStorage.getItem('jwt')));
       mainApi
         .getUserArticles()
-        .then((cards) => {
-          const convertedCards = cards.map((article) => {
-            return {
-              keyword: article.keyword,
-              title: article.title,
-              description: article.text,
-              publishedAt: article.date,
-              url: article.link,
-              urlToImage: article.image,
-              source: { name: article.source },
-              id: article._id,
-            };
-          });
-          setSavedCards(convertedCards);
-        })
+        .then((cards) => setSavedCards(cards))
         .catch((err) => console.log(err));
     }
   }, [currentUser]);
@@ -76,16 +50,12 @@ function App() {
   return (
     <div className='app'>
       <Routes>
-        <Route path='/' element={<Main savedCards={savedCards} handleBookmark={handleBookmark} />} />
+        <Route path='/' element={<Main savedCards={savedCards} removeBookmark={removeBookmark} />} />
         <Route
           path='/saved-articles'
           element={
             <ProtectedRoute isLoggedIn={currentUser.isLoggedIn} redirectPath='/'>
-              <Articles
-                savedCards={savedCards.map((card) => (
-                  <NewsCard key={card.id} onTrashClick={handleTrashClick} {...card} />
-                ))}
-              />
+              <Articles savedCards={savedCards} />
             </ProtectedRoute>
           }
         />

@@ -19,8 +19,9 @@ const parseKeywords = (keywordArray: Array<String>): String | null => {
   });
 
   const sortedKeywords = [...keywordMap].sort(([, aCount], [, bCount]) => bCount - aCount);
-  const first = sortedKeywords?.[0][0];
-  const second = sortedKeywords?.[1][0];
+  const first = sortedKeywords?.[0]?.[0];
+  const second = sortedKeywords?.[1]?.[0];
+  const third = sortedKeywords?.[2]?.[0];
   const rest = sortedKeywords.length - 2;
 
   switch (sortedKeywords.length) {
@@ -30,8 +31,10 @@ const parseKeywords = (keywordArray: Array<String>): String | null => {
       return `${first}`;
     case 2:
       return `${first} and ${second}`;
+    case 3:
+      return `${first}, ${second} and ${third}`;
     default:
-      return `${first}, ${second}, and ${rest} other`;
+      return `${first}, ${second}, and ${rest} others`;
   }
 };
 

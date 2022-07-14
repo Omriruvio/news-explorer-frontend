@@ -8,7 +8,7 @@ const SavedNewsHeader = ({ savedCards }) => {
   const [keywords, setKeywords] = useState('');
 
   useEffect(() => {
-    const newKeyWords = savedCards.map((card) => card.props.keyword);
+    const newKeyWords = savedCards.map((card) => card.keyword);
     setKeywords(parseKeywords(newKeyWords));
   }, [savedCards]);
 

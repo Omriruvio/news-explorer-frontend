@@ -2,8 +2,9 @@ import './NewsCard.css';
 import CardLabel from '../CardLabel/CardLabel';
 import { parseDate } from '../../utils/parseDate';
 import { mainApi } from '../../utils/MainApi.ts';
+import { useState } from 'react';
 
-const NewsCard = ({ handleBookmark, onTrashClick, ...card }) => {
+const NewsCard = ({ handleBookmark, removeBookmark, onTrashClick, ...card }) => {
   const {
     id,
     keyword,
@@ -16,9 +17,18 @@ const NewsCard = ({ handleBookmark, onTrashClick, ...card }) => {
     source: { name },
   } = card;
 
+  const [isFreshSave, setIsFreshSave] = useState(false);
+
   const handleBookmarkClick = () => {
-    handleBookmark({ date: publishedAt, image: urlToImage, keyword, link: url, source: name, text: description, title });
-    return mainApi.saveArticle({ date: publishedAt, image: urlToImage, keyword, link: url, source: name, text: description, title });
+    mainApi
+      .saveArticle({ date: publishedAt, image: urlToImage, keyword, link: url, source: name, text: description, title })
+      .then(() => setIsFreshSave(true))
+      .catch((err) => console.log(err));
+  };
+
+  const handleRemoveBookMark = () => {
+    removeBookmark(card.url);
+    setIsFreshSave(false);
   };
 
   const handleTrashClick = () => {
@@ -29,7 +39,14 @@ const NewsCard = ({ handleBookmark, onTrashClick, ...card }) => {
     <li>
       <article className='news-card'>
         <div className='news-card__image-container'>
-          <CardLabel onTrashClick={handleTrashClick} onBookmark={handleBookmarkClick} text={keyword} isSaved={isSaved} />
+          <CardLabel
+            removeBookmark={handleRemoveBookMark}
+            onTrashClick={handleTrashClick}
+            onBookmark={handleBookmarkClick}
+            text={keyword}
+            isSaved={isSaved}
+            isFreshSave={isFreshSave}
+          />
           <a href={url} target={'_blank'} rel='noreferrer'>
             <img className='news-card__image' src={urlToImage} alt={title}></img>
           </a>

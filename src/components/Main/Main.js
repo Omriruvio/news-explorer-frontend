@@ -15,7 +15,7 @@ import NothingFound from '../NothingFound/NothingFound';
 import { mainApi } from '../../utils/MainApi.ts';
 import ConnectionError from '../ConnectionError/ConnectionError';
 
-const Main = ({ savedCards, handleBookmark }) => {
+const Main = ({ savedCards, handleBookmark, removeBookmark }) => {
   const isMobileSized = useWindowSize().width < 650;
   const [popupState, popupDispatch] = usePopups();
   const { signIn } = useAuth();
@@ -88,8 +88,9 @@ const Main = ({ savedCards, handleBookmark }) => {
         })
         .catch((err) => console.log(err))
         .finally(() => {
-          const { keyword, results } = JSON.parse(localStorage.getItem('searchResults'));
-          if (results) {
+          const searchResults = localStorage.getItem('searchResults');
+          if (searchResults) {
+            const { keyword, results } = JSON.parse(searchResults);
             setSearchResults(results);
             setSearchKeyword(keyword);
           }
@@ -150,6 +151,7 @@ const Main = ({ savedCards, handleBookmark }) => {
       {connectionError && <ConnectionError />}
       <SearchResults
         handleBookmark={handleBookmark}
+        removeBookmark={removeBookmark}
         savedCards={savedCards}
         keyword={searchKeyword}
         isSearching={isSearching}

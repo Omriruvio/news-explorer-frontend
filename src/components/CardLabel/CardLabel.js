@@ -9,10 +9,9 @@ import { useLocation } from 'react-router';
 import { useState } from 'react';
 import { usePopups, popupActions } from '../../contexts/PopupContext';
 
-const CardLabel = ({ text, isSaved, onBookmark, onTrashClick }) => {
+const CardLabel = ({ text, isSaved, isFreshSave, onBookmark, removeBookmark, onTrashClick }) => {
   const isArticles = useLocation().pathname === '/saved-articles';
   const [trashIcon, setTrashIcon] = useState(trashButtonGrey);
-  const [newSaved, setNewSaved] = useState(false);
   const [bookmarkIcon, setBookmarkIcon] = useState(bookmarkGrey);
   const { currentUser } = useAuth();
   const [, popupDispatch] = usePopups();
@@ -20,20 +19,9 @@ const CardLabel = ({ text, isSaved, onBookmark, onTrashClick }) => {
   const handleBookmarkClick = () => {
     if (!currentUser.isLoggedIn) {
       popupDispatch(popupActions.openSignUpPopup);
-      return;
-    }
-
-    if (isSaved || newSaved) {
-      // remove bookmark logic here
-      return;
-    }
-
-    onBookmark()
-      .then(() => {
-        setBookmarkIcon(bookmarkBlue);
-        setNewSaved(true);
-      })
-      .catch((err) => console.log(err));
+    } else if (isSaved || isFreshSave) {
+      removeBookmark();
+    } else onBookmark();
   };
 
   return (
@@ -47,12 +35,12 @@ const CardLabel = ({ text, isSaved, onBookmark, onTrashClick }) => {
           )}
           <button
             onClick={handleBookmarkClick}
-            onMouseEnter={() => !isSaved && !newSaved && setBookmarkIcon(bookmarkBlack)}
-            onMouseLeave={() => !isSaved && !newSaved && setBookmarkIcon(bookmarkGrey)}
+            onMouseEnter={() => !isSaved && !isFreshSave && setBookmarkIcon(bookmarkBlack)}
+            onMouseLeave={() => !isSaved && !isFreshSave && setBookmarkIcon(bookmarkGrey)}
             className='label-button'
             type='button'
           >
-            <img className='label-icon' src={isSaved ? bookmarkBlue : bookmarkIcon} alt={'Bookmark icon'}></img>
+            <img className='label-icon' src={isSaved || isFreshSave ? bookmarkBlue : bookmarkIcon} alt={'Bookmark icon'}></img>
           </button>
         </div>
       )}

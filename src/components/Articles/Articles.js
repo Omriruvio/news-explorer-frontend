@@ -3,7 +3,6 @@ import './Articles.css';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import ArticleSection from '../ArticleSection/ArticleSection';
 import { useEffect, useState } from 'react';
-// import { savedCards } from '../../constants/mockData';
 import NewsCard from '../NewsCard/NewsCard';
 import UserMenu from '../UserMenu/UserMenu';
 import { usePopups } from '../../contexts/PopupContext';
@@ -12,18 +11,36 @@ import { mainApi } from '../../utils/MainApi.ts';
 
 const Articles = ({ savedCards }) => {
   const [popupState] = usePopups();
-  const [savedArticles, setSavedArticles] = useState();
+  const [freshCards, setFreshCards] = useState([]);
   const isMobileSized = useWindowSize().width < 650;
 
-  useEffect(() => {});
+  const handleTrashClick = (id) => {
+    mainApi
+      .deleteArticle(id)
+      .then(() => {
+        setFreshCards((oldCards) => oldCards.filter((card) => card.id !== id));
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    mainApi
+      .getUserArticles()
+      .then((cards) => setFreshCards(cards))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <>
       <Header />
       {popupState.isUserMenuOpen && isMobileSized && <UserMenu />}
-      <SavedNewsHeader savedCards={savedCards} />
+      <SavedNewsHeader savedCards={freshCards || savedCards} />
       <ArticleSection>
-        <ul className='results__article-container'>{savedCards}</ul>
+        <ul className='results__article-container'>
+          {freshCards.map((card, i) => (
+            <NewsCard key={i} onTrashClick={handleTrashClick} {...card} />
+          ))}
+        </ul>
       </ArticleSection>
     </>
   );
