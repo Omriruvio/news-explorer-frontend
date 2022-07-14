@@ -8,6 +8,7 @@ import UserMenu from '../UserMenu/UserMenu';
 import { usePopups } from '../../contexts/PopupContext';
 import useWindowSize from '../../hooks/UseWindowSize';
 import { mainApi } from '../../utils/MainApi.ts';
+import { sortByRelevance } from '../../utils/sortByRelevance.ts';
 
 const Articles = ({ savedCards }) => {
   const [popupState] = usePopups();
@@ -26,7 +27,10 @@ const Articles = ({ savedCards }) => {
   useEffect(() => {
     mainApi
       .getUserArticles()
-      .then((cards) => setFreshCards(cards))
+      .then((cards) => {
+        const sortedCards = sortByRelevance(cards);
+        setFreshCards(sortedCards);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -34,7 +38,7 @@ const Articles = ({ savedCards }) => {
     <>
       <Header />
       {popupState.isUserMenuOpen && isMobileSized && <UserMenu />}
-      <SavedNewsHeader savedCards={freshCards || savedCards} />
+      <SavedNewsHeader savedCards={freshCards /*  || savedCards */} />
       <ArticleSection>
         <ul className='results__article-container'>
           {freshCards.map((card, i) => (
