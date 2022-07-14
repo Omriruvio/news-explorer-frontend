@@ -14,10 +14,12 @@ import { useState, useEffect } from 'react';
 import NothingFound from '../NothingFound/NothingFound';
 import { mainApi } from '../../utils/MainApi.ts';
 import ConnectionError from '../ConnectionError/ConnectionError';
+import { userActions } from '../../contexts/AuthContext';
 
 const Main = ({ savedCards, handleBookmark, removeBookmark }) => {
   const isMobileSized = useWindowSize().width < 650;
   const [popupState, popupDispatch] = usePopups();
+  const { currentUserDispatch } = useAuth();
   const { signIn } = useAuth();
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
@@ -55,8 +57,9 @@ const Main = ({ savedCards, handleBookmark, removeBookmark }) => {
     mainApi
       .userSignin(email, password)
       .then((user) => {
-        signIn(user.name);
+        // signIn(user.name);
         localStorage.setItem('jwt', JSON.stringify(user.token));
+        currentUserDispatch({ type: 'signIn', payload: { name: user.name, isLoggedIn: true } });
         popupDispatch(popupActions.closeSignInPopup);
       })
       .catch((err) => {
@@ -84,7 +87,7 @@ const Main = ({ savedCards, handleBookmark, removeBookmark }) => {
       mainApi
         .getCurrentUser()
         .then((user) => {
-          signIn(user.name);
+          currentUserDispatch({ type: 'signIn', payload: { name: user.name, isLoggedIn: true } });
         })
         .catch((err) => console.log(err))
         .finally(() => {
@@ -96,7 +99,7 @@ const Main = ({ savedCards, handleBookmark, removeBookmark }) => {
           }
         });
     }
-  }, [signIn]);
+  }, [signIn, currentUserDispatch]);
 
   return (
     <>

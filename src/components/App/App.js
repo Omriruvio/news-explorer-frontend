@@ -10,7 +10,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { mainApi } from '../../utils/MainApi.ts';
 
 function App() {
-  const [, popupDispatch] = usePopups();
+  const [popupState, popupDispatch] = usePopups();
   const { currentUser } = useAuth();
   const [savedCards, setSavedCards] = useState([]);
   const navigate = useNavigate();
@@ -40,6 +40,8 @@ function App() {
   }, [popupDispatch]);
 
   useEffect(() => {
+    console.log(currentUser);
+    console.log(popupState);
     if (currentUser.isLoggedIn) {
       mainApi.setUserToken(JSON.parse(localStorage.getItem('jwt')));
       mainApi
@@ -50,7 +52,7 @@ function App() {
       navigate('/');
       popupDispatch(popupActions.openSignUpPopup);
     }
-  }, [currentUser, navigate, popupDispatch, location.pathname]);
+  }, [currentUser, navigate, popupDispatch, location.pathname, popupState]);
 
   return (
     <div className='app'>

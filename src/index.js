@@ -7,12 +7,13 @@ import { BrowserRouter } from 'react-router-dom';
 import { PopupProvider } from './contexts/PopupContext';
 import { initialPopupState, popupReducer } from './reducers/popupReducer';
 import { AuthProvider } from './contexts/AuthContext';
+import { initialUserState, userReducer } from './reducers/userReducer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
+      <AuthProvider initialState={initialUserState} reducer={userReducer}>
         <PopupProvider initialState={initialPopupState} reducer={popupReducer}>
           <App />
         </PopupProvider>

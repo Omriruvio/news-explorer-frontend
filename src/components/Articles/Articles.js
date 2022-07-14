@@ -28,7 +28,9 @@ const Articles = ({ savedCards }) => {
     mainApi
       .getUserArticles()
       .then((cards) => {
+        console.log(cards);
         const sortedCards = sortByRelevance(cards);
+        console.log(sortedCards);
         setFreshCards(sortedCards);
       })
       .catch((err) => console.log(err));
