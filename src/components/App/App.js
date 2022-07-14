@@ -26,7 +26,6 @@ function App() {
         })
         .catch((err) => console.log(err));
     } else {
-      console.log('happens when card removed before making it to API');
       setSavedCards((oldCards) => oldCards.filter((card) => card.url !== url));
     }
   };
@@ -40,17 +39,24 @@ function App() {
   }, [popupDispatch]);
 
   useEffect(() => {
-    if (currentUser.isLoggedIn) {
-      mainApi.setUserToken(JSON.parse(localStorage.getItem('jwt')));
+    const jwt = localStorage.getItem('jwt');
+    if (!jwt && !currentUser.isLoggedIn && location.pathname === '/saved-articles') {
+      navigate('/');
+      popupDispatch(popupActions.openSignUpPopup);
+      return;
+    }
+  }, [currentUser.isLoggedIn, navigate, popupDispatch, location.pathname]);
+
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      mainApi.setUserToken(JSON.parse(jwt));
       mainApi
         .getUserArticles()
         .then((cards) => setSavedCards(cards))
         .catch((err) => console.log(err));
-    } else if (location.pathname === '/saved-articles') {
-      navigate('/');
-      popupDispatch(popupActions.openSignUpPopup);
     }
-  }, [currentUser, navigate, popupDispatch, location.pathname]);
+  }, []);
 
   return (
     <div className='app'>

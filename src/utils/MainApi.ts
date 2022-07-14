@@ -17,7 +17,7 @@ class MainApi {
     this._baseUrl = baseUrl;
   }
 
-  _handleResponse = (res) => (res.ok ? res.json() : Promise.reject(res));
+  _handleResponse = async (res) => (res.ok ? res.json() : Promise.reject(await res.json()));
 
   _fetch = (endpoint: string, method: string, body?: any): Promise<unknown> =>
     fetch(`${this._baseUrl}${endpoint}`, {

@@ -46,8 +46,8 @@ const Main = ({ savedCards, handleBookmark, removeBookmark }) => {
         popupDispatch(popupActions.closeSignUpPopup);
       })
       .catch((err) => {
-        console.log(err.statusText);
-        setResponseError(err.statusText);
+        console.log(err.message);
+        setResponseError(err.message);
       });
   };
 
@@ -57,11 +57,12 @@ const Main = ({ savedCards, handleBookmark, removeBookmark }) => {
       .then((user) => {
         signIn(user.name);
         localStorage.setItem('jwt', JSON.stringify(user.token));
+        mainApi.setUserToken(user.token);
         popupDispatch(popupActions.closeSignInPopup);
       })
       .catch((err) => {
-        console.log(err.statusText);
-        setResponseError(err.statusText);
+        console.log(err);
+        setResponseError(err.message);
       });
   };
 
@@ -97,6 +98,15 @@ const Main = ({ savedCards, handleBookmark, removeBookmark }) => {
         });
     }
   }, [signIn]);
+
+  useEffect(() => {
+    const searchResults = localStorage.getItem('searchResults');
+    if (searchResults) {
+      const { results, keyword } = JSON.parse(searchResults);
+      setSearchResults(results);
+      setSearchKeyword(keyword);
+    }
+  }, []);
 
   return (
     <>
