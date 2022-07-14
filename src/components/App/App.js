@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Main from '../Main/Main';
 import './App.css';
 import Footer from '../Footer/Footer';
@@ -13,6 +13,8 @@ function App() {
   const [, popupDispatch] = usePopups();
   const { currentUser } = useAuth();
   const [savedCards, setSavedCards] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const removeBookmark = (url) => {
     const card = savedCards.find((card) => card.url === url);
@@ -44,8 +46,11 @@ function App() {
         .getUserArticles()
         .then((cards) => setSavedCards(cards))
         .catch((err) => console.log(err));
+    } else if (location.pathname === '/saved-articles') {
+      navigate('/');
+      popupDispatch(popupActions.openSignUpPopup);
     }
-  }, [currentUser]);
+  }, [currentUser, navigate, popupDispatch, location.pathname]);
 
   return (
     <div className='app'>
