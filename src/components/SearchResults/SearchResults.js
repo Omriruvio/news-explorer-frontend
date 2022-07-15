@@ -6,7 +6,7 @@ import Preloader from '../Preloader/Preloader';
 import ArticleSection from '../ArticleSection/ArticleSection';
 import { useInfo } from '../../contexts/UserContext';
 
-const SearchResults = ({ handleBookmark, removeBookmark, isSearching, searchResults, keyword }) => {
+const SearchResults = ({ isSearching, searchResults, keyword }) => {
   const [displaySets, setDisplaySets] = useState(0);
   const [displayCards, setDisplayCards] = useState([]);
   const { savedCards } = useInfo();
@@ -21,7 +21,9 @@ const SearchResults = ({ handleBookmark, removeBookmark, isSearching, searchResu
     (cardArray, count = 1, size = 3) => {
       const lastIndex = count * size - 1;
       const cardsToDisplay = cardArray.slice(0, lastIndex + 1).map((card) => {
-        return { ...card, isSaved: savedCards.some((savedCard) => savedCard.url === card.url) };
+        const saved = savedCards.find((saved) => saved.url === card.url);
+        const id = saved?.id;
+        return { ...card, id, isSaved: savedCards.some((savedCard) => savedCard.url === card.url) };
       });
       return cardsToDisplay;
     },
@@ -29,7 +31,6 @@ const SearchResults = ({ handleBookmark, removeBookmark, isSearching, searchResu
   );
 
   useEffect(() => {
-    // console.log(getDisplayCards(searchResults));
     setDisplaySets(0);
     setDisplayCards([]);
     if (searchResults?.length !== 0) {
@@ -46,7 +47,7 @@ const SearchResults = ({ handleBookmark, removeBookmark, isSearching, searchResu
           {displaySets !== 0 && <h2 className='results__title'>Search results</h2>}
           <ul className='results__article-container'>
             {displayCards.map((card, i) => (
-              <NewsCard key={i} removeBookmark={removeBookmark} handleBookmark={handleBookmark} keyword={keyword} {...card}></NewsCard>
+              <NewsCard key={i} keyword={keyword} {...card}></NewsCard>
             ))}
           </ul>
           {!isSearching && displayCards.length < searchResults.length && <ShowMoreButton getNextCards={handleGetNextCards} />}

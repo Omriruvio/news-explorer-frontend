@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useState } from 'react';
 import { sortByRelevance } from '../utils/sortByRelevance.ts';
 
 const UserContext = createContext();

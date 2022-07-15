@@ -15,10 +15,10 @@ import NothingFound from '../NothingFound/NothingFound';
 import { mainApi } from '../../utils/MainApi.ts';
 import ConnectionError from '../ConnectionError/ConnectionError';
 
-const Main = ({ handleBookmark }) => {
+const Main = () => {
   const isMobileSized = useWindowSize().width < 650;
   const [popupState, popupDispatch] = usePopups();
-  const { signIn, savedCards, setAndSortSavedCards } = useInfo();
+  const { signIn, setAndSortSavedCards } = useInfo();
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState();
@@ -78,20 +78,6 @@ const Main = ({ handleBookmark }) => {
     } else {
       setSearchResults(results);
       localStorage.setItem('searchResults', JSON.stringify({ keyword, results }));
-    }
-  };
-
-  const removeBookmark = (url) => {
-    const card = savedCards.find((card) => card.url === url);
-    if (card) {
-      mainApi
-        .deleteArticle(card.id)
-        .then(() => {
-          setAndSortSavedCards(savedCards.filter((card) => card.url !== url));
-        })
-        .catch((err) => console.log(err));
-    } else {
-      setAndSortSavedCards(savedCards.filter((card) => card.url !== url));
     }
   };
 
@@ -155,13 +141,7 @@ const Main = ({ handleBookmark }) => {
       </section>
       {nothingFound && <NothingFound />}
       {connectionError && <ConnectionError />}
-      <SearchResults
-        handleBookmark={handleBookmark}
-        removeBookmark={removeBookmark}
-        keyword={searchKeyword}
-        isSearching={isSearching}
-        searchResults={searchResults}
-      />
+      <SearchResults keyword={searchKeyword} isSearching={isSearching} searchResults={searchResults} />
       <AboutMe />
     </>
   );

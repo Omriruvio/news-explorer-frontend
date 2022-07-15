@@ -7,22 +7,12 @@ import trashButtonGrey from '../../images/trash-grey.svg';
 import { useInfo } from '../../contexts/UserContext';
 import { useLocation } from 'react-router';
 import { useState } from 'react';
-import { usePopups, popupActions } from '../../contexts/PopupContext';
 
-const CardLabel = ({ text, isSaved, isFreshSave, onBookmark, removeBookmark, onTrashClick }) => {
+const CardLabel = ({ isDeleted, text, isSaved, saveId, onBookmark, onTrashClick }) => {
   const isArticles = useLocation().pathname === '/saved-articles';
   const [trashIcon, setTrashIcon] = useState(trashButtonGrey);
   const [bookmarkIcon, setBookmarkIcon] = useState(bookmarkGrey);
   const { currentUser } = useInfo();
-  const [, popupDispatch] = usePopups();
-
-  const handleBookmarkClick = () => {
-    if (!currentUser.isLoggedIn) {
-      popupDispatch(popupActions.openSignUpPopup);
-    } else if (isSaved || isFreshSave) {
-      removeBookmark();
-    } else onBookmark();
-  };
 
   return (
     <>
@@ -34,13 +24,13 @@ const CardLabel = ({ text, isSaved, isFreshSave, onBookmark, removeBookmark, onT
             </div>
           )}
           <button
-            onClick={handleBookmarkClick}
-            onMouseEnter={() => !isSaved && !isFreshSave && setBookmarkIcon(bookmarkBlack)}
-            onMouseLeave={() => !isSaved && !isFreshSave && setBookmarkIcon(bookmarkGrey)}
+            onClick={onBookmark}
+            onMouseEnter={() => !isSaved && setBookmarkIcon(bookmarkBlack)}
+            onMouseLeave={() => !isSaved && setBookmarkIcon(bookmarkGrey)}
             className='label-button'
             type='button'
           >
-            <img className='label-icon' src={isSaved || isFreshSave ? bookmarkBlue : bookmarkIcon} alt={'Bookmark icon'}></img>
+            <img className='label-icon' src={!isDeleted && (saveId || isSaved) ? bookmarkBlue : bookmarkIcon} alt={'Bookmark icon'}></img>
           </button>
         </div>
       )}

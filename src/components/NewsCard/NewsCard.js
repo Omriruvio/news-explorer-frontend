@@ -4,10 +4,11 @@ import { parseDate } from '../../utils/parseDate';
 import { mainApi } from '../../utils/MainApi.ts';
 import { useState } from 'react';
 import { useInfo } from '../../contexts/UserContext';
+import { popupActions, usePopups } from '../../contexts/PopupContext';
 
-const NewsCard = ({ handleBookmark, removeBookmark, onTrashClick, ...card }) => {
+const NewsCard = ({ removeBookmark, ...card }) => {
   const {
-    id,
+    id: searchId,
     keyword,
     isSaved,
     title,
@@ -18,24 +19,46 @@ const NewsCard = ({ handleBookmark, removeBookmark, onTrashClick, ...card }) => 
     source: { name },
   } = card;
 
-  const [isFreshSave, setIsFreshSave] = useState(false);
-  const { setAndSortSavedCards, savedCards } = useInfo();
+  const { currentUser, setAndSortSavedCards, savedCards } = useInfo();
+  const [, popupDispatch] = usePopups();
+  const [saveId, setSaveId] = useState(null);
+  const [isDeleted, setIsDeleted] = useState(false);
 
-  const handleBookmarkClick = () => {
-    setAndSortSavedCards([...savedCards, { ...card, isSaved: true }]);
-    mainApi
-      .saveArticle({ date: publishedAt, image: urlToImage, keyword, link: url, source: name, text: description, title })
-      .then(() => setIsFreshSave(true))
-      .catch((err) => console.log(err));
-  };
-
-  const handleRemoveBookMark = () => {
-    removeBookmark(card.url);
-    setIsFreshSave(false);
+  const handleBookMark = () => {
+    if (!currentUser.isLoggedIn) {
+      popupDispatch(popupActions.openSignInPopup);
+    } else if (isSaved || saveId) {
+      // found as saved through search (no saveId)
+      // or added as saved through search (saveId added)
+      mainApi
+        .deleteArticle(saveId || searchId)
+        .then((cards) => {
+          setAndSortSavedCards(cards);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          setAndSortSavedCards(savedCards.filter((xCard) => xCard.url !== url));
+          setSaveId(null);
+          setIsDeleted(true);
+        });
+    } else {
+      mainApi
+        .saveArticle({ date: publishedAt, image: urlToImage, keyword, link: url, source: name, text: description, title })
+        .then((card) => {
+          setSaveId(card._id);
+          setIsDeleted(false);
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const handleTrashClick = () => {
-    onTrashClick(id);
+    mainApi
+      .deleteArticle(searchId || saveId)
+      .then(() => {
+        setAndSortSavedCards(savedCards.filter((card) => card.id !== searchId || saveId));
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -43,12 +66,12 @@ const NewsCard = ({ handleBookmark, removeBookmark, onTrashClick, ...card }) => 
       <article className='news-card'>
         <div className='news-card__image-container'>
           <CardLabel
-            removeBookmark={handleRemoveBookMark}
             onTrashClick={handleTrashClick}
-            onBookmark={handleBookmarkClick}
+            onBookmark={handleBookMark}
             text={keyword}
             isSaved={isSaved}
-            isFreshSave={isFreshSave}
+            saveId={saveId}
+            isDeleted={isDeleted}
           />
           <a href={url} target={'_blank'} rel='noreferrer'>
             <img className='news-card__image' src={urlToImage} alt={title}></img>

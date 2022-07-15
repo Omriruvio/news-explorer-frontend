@@ -15,15 +15,6 @@ const Articles = () => {
   const isMobileSized = useWindowSize().width < 650;
   const { savedCards, setAndSortSavedCards } = useInfo();
 
-  const handleTrashClick = (id) => {
-    mainApi
-      .deleteArticle(id)
-      .then(() => {
-        setAndSortSavedCards(savedCards.filter((card) => card.id !== id));
-      })
-      .catch((err) => console.log(err));
-  };
-
   useEffect(() => {
     mainApi
       .getUserArticles()
@@ -41,7 +32,7 @@ const Articles = () => {
       <ArticleSection>
         <ul className='results__article-container'>
           {savedCards.map((card, i) => (
-            <NewsCard key={i} onTrashClick={handleTrashClick} {...card} />
+            <NewsCard key={i} {...card} />
           ))}
         </ul>
       </ArticleSection>
