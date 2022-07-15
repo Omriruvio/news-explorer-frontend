@@ -8,23 +8,20 @@ import SearchResults from '../SearchResults/SearchResults';
 import AboutMe from '../AboutMe/AboutMe';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { usePopups, popupActions } from '../../contexts/PopupContext';
-import { useInfo } from '../../contexts/UserContext';
 import AuthForm from '../AuthForm/AuthForm';
 import { useState, useEffect } from 'react';
 import NothingFound from '../NothingFound/NothingFound';
-import { mainApi } from '../../utils/MainApi.ts';
 import ConnectionError from '../ConnectionError/ConnectionError';
+import { MAX_MOBILE_SIZE } from '../../utils/constants';
 
-const Main = () => {
-  const isMobileSized = useWindowSize().width < 650;
+const Main = ({ handleSignin, handleSignup, responseError, setResponseError }) => {
+  const isMobileSized = useWindowSize().width < MAX_MOBILE_SIZE;
   const [popupState, popupDispatch] = usePopups();
-  const { signIn, setAndSortSavedCards } = useInfo();
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState();
   const [nothingFound, setNothingFound] = useState(false);
   const [connectionError, setConnectionError] = useState(false);
-  const [responseError, setResponseError] = useState(null);
 
   const showSignUp = () => {
     setResponseError(null);
@@ -36,37 +33,6 @@ const Main = () => {
     setResponseError(null);
     popupDispatch(popupActions.closeAll);
     popupDispatch(popupActions.openSignInPopup);
-  };
-
-  const handleSignup = ({ email, password, username }) => {
-    mainApi
-      .userSignup(email, password, username)
-      .then((user) => {
-        popupDispatch(popupActions.openSuccessPopup);
-        popupDispatch(popupActions.closeSignUpPopup);
-      })
-      .catch((err) => {
-        console.log(err.message);
-        setResponseError(err.message);
-      });
-  };
-
-  const handleSignin = ({ email, password }) => {
-    mainApi
-      .userSignin(email, password)
-      .then((user) => {
-        signIn(user.name);
-        localStorage.setItem('jwt', JSON.stringify(user.token));
-        mainApi.setUserToken(user.token);
-        popupDispatch(popupActions.closeSignInPopup);
-        mainApi.getUserArticles().then((cards) => {
-          setAndSortSavedCards(cards);
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        setResponseError(err.message);
-      });
   };
 
   const handleSearchSubmit = (results, keyword) => {

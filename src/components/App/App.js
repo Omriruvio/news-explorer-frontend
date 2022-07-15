@@ -3,7 +3,7 @@ import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Articles from '../Articles/Articles';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { usePopups, popupActions } from '../../contexts/PopupContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { useInfo } from '../../contexts/UserContext';
@@ -11,10 +11,41 @@ import { mainApi } from '../../utils/MainApi.ts';
 
 function App() {
   const [, popupDispatch] = usePopups();
-  const { currentUser, setAndSortSavedCards } = useInfo();
+  const { currentUser, setAndSortSavedCards, signIn } = useInfo();
   const navigate = useNavigate();
   const location = useLocation();
-  const { signIn } = useInfo();
+  const [responseError, setResponseError] = useState(null);
+
+  const handleSignup = ({ email, password, username }) => {
+    mainApi
+      .userSignup(email, password, username)
+      .then(() => {
+        popupDispatch(popupActions.openSuccessPopup);
+        popupDispatch(popupActions.closeSignUpPopup);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setResponseError(err.message);
+      });
+  };
+
+  const handleSignin = ({ email, password }) => {
+    mainApi
+      .userSignin(email, password)
+      .then((user) => {
+        signIn(user.name);
+        localStorage.setItem('jwt', JSON.stringify(user.token));
+        mainApi.setUserToken(user.token);
+        popupDispatch(popupActions.closeSignInPopup);
+        mainApi.getUserArticles().then((cards) => {
+          setAndSortSavedCards(cards);
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setResponseError(err.message);
+      });
+  };
 
   useEffect(() => {
     const closeByEsc = (e) => {
@@ -28,7 +59,6 @@ function App() {
     if (!currentUser.isLoggedIn && location.pathname === '/saved-articles') {
       navigate('/');
       popupDispatch(popupActions.openSignUpPopup);
-      return;
     }
   }, [currentUser.isLoggedIn, navigate, popupDispatch, location.pathname]);
 
@@ -54,7 +84,10 @@ function App() {
   return (
     <div className='app'>
       <Routes>
-        <Route path='/' element={<Main />} />
+        <Route
+          path='/'
+          element={<Main responseError={responseError} setResponseError={setResponseError} handleSignin={handleSignin} handleSignup={handleSignup} />}
+        />
         <Route
           path='/saved-articles'
           element={

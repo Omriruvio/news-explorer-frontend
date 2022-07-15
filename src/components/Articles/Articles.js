@@ -9,10 +9,11 @@ import { useInfo } from '../../contexts/UserContext';
 import { mainApi } from '../../utils/MainApi.ts';
 import NewsCard from '../NewsCard/NewsCard';
 import { useEffect } from 'react';
+import { MAX_MOBILE_SIZE } from '../../utils/constants';
 
 const Articles = () => {
   const [popupState] = usePopups();
-  const isMobileSized = useWindowSize().width < 650;
+  const isMobileSized = useWindowSize().width < MAX_MOBILE_SIZE;
   const { savedCards, setAndSortSavedCards } = useInfo();
 
   useEffect(() => {
@@ -31,8 +32,8 @@ const Articles = () => {
       <SavedNewsHeader />
       <ArticleSection>
         <ul className='results__article-container'>
-          {savedCards.map((card, i) => (
-            <NewsCard key={i} {...card} />
+          {savedCards.map((card) => (
+            <NewsCard key={card.id} {...card} />
           ))}
         </ul>
       </ArticleSection>
