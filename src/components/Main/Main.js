@@ -8,17 +8,17 @@ import SearchResults from '../SearchResults/SearchResults';
 import AboutMe from '../AboutMe/AboutMe';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { usePopups, popupActions } from '../../contexts/PopupContext';
-import { useAuth } from '../../contexts/AuthContext';
+import { useInfo } from '../../contexts/UserContext';
 import AuthForm from '../AuthForm/AuthForm';
 import { useState, useEffect } from 'react';
 import NothingFound from '../NothingFound/NothingFound';
 import { mainApi } from '../../utils/MainApi.ts';
 import ConnectionError from '../ConnectionError/ConnectionError';
 
-const Main = ({ savedCards, handleBookmark, removeBookmark }) => {
+const Main = ({ handleBookmark }) => {
   const isMobileSized = useWindowSize().width < 650;
   const [popupState, popupDispatch] = usePopups();
-  const { signIn } = useAuth();
+  const { signIn, savedCards, setAndSortSavedCards } = useInfo();
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState();
@@ -59,6 +59,9 @@ const Main = ({ savedCards, handleBookmark, removeBookmark }) => {
         localStorage.setItem('jwt', JSON.stringify(user.token));
         mainApi.setUserToken(user.token);
         popupDispatch(popupActions.closeSignInPopup);
+        mainApi.getUserArticles().then((cards) => {
+          setAndSortSavedCards(cards);
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -78,26 +81,19 @@ const Main = ({ savedCards, handleBookmark, removeBookmark }) => {
     }
   };
 
-  useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      mainApi.setUserToken(JSON.parse(jwt));
+  const removeBookmark = (url) => {
+    const card = savedCards.find((card) => card.url === url);
+    if (card) {
       mainApi
-        .getCurrentUser()
-        .then((user) => {
-          signIn(user.name);
+        .deleteArticle(card.id)
+        .then(() => {
+          setAndSortSavedCards(savedCards.filter((card) => card.url !== url));
         })
-        .catch((err) => console.log(err))
-        .finally(() => {
-          const searchResults = localStorage.getItem('searchResults');
-          if (searchResults) {
-            const { keyword, results } = JSON.parse(searchResults);
-            setSearchResults(results);
-            setSearchKeyword(keyword);
-          }
-        });
+        .catch((err) => console.log(err));
+    } else {
+      setAndSortSavedCards(savedCards.filter((card) => card.url !== url));
     }
-  }, [signIn]);
+  };
 
   useEffect(() => {
     const searchResults = localStorage.getItem('searchResults');
@@ -162,7 +158,6 @@ const Main = ({ savedCards, handleBookmark, removeBookmark }) => {
       <SearchResults
         handleBookmark={handleBookmark}
         removeBookmark={removeBookmark}
-        savedCards={savedCards}
         keyword={searchKeyword}
         isSearching={isSearching}
         searchResults={searchResults}

@@ -2,24 +2,24 @@ import Header from '../Header/Header';
 import './Articles.css';
 import SavedNewsHeader from '../SavedNewsHeader/SavedNewsHeader';
 import ArticleSection from '../ArticleSection/ArticleSection';
-import { useEffect, useState } from 'react';
-import NewsCard from '../NewsCard/NewsCard';
 import UserMenu from '../UserMenu/UserMenu';
 import { usePopups } from '../../contexts/PopupContext';
 import useWindowSize from '../../hooks/UseWindowSize';
+import { useInfo } from '../../contexts/UserContext';
 import { mainApi } from '../../utils/MainApi.ts';
-import { sortByRelevance } from '../../utils/sortByRelevance.ts';
+import NewsCard from '../NewsCard/NewsCard';
+import { useEffect } from 'react';
 
-const Articles = ({ savedCards }) => {
+const Articles = () => {
   const [popupState] = usePopups();
-  const [freshCards, setFreshCards] = useState([]);
   const isMobileSized = useWindowSize().width < 650;
+  const { savedCards, setAndSortSavedCards } = useInfo();
 
   const handleTrashClick = (id) => {
     mainApi
       .deleteArticle(id)
       .then(() => {
-        setFreshCards((oldCards) => oldCards.filter((card) => card.id !== id));
+        setAndSortSavedCards(savedCards.filter((card) => card.id !== id));
       })
       .catch((err) => console.log(err));
   };
@@ -28,20 +28,19 @@ const Articles = ({ savedCards }) => {
     mainApi
       .getUserArticles()
       .then((cards) => {
-        const sortedCards = sortByRelevance(cards);
-        setFreshCards(sortedCards);
+        setAndSortSavedCards(cards);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [setAndSortSavedCards]);
 
   return (
     <>
       <Header />
       {popupState.isUserMenuOpen && isMobileSized && <UserMenu />}
-      <SavedNewsHeader savedCards={freshCards /*  || savedCards */} />
+      <SavedNewsHeader />
       <ArticleSection>
         <ul className='results__article-container'>
-          {freshCards.map((card, i) => (
+          {savedCards.map((card, i) => (
             <NewsCard key={i} onTrashClick={handleTrashClick} {...card} />
           ))}
         </ul>

@@ -3,6 +3,7 @@ import CardLabel from '../CardLabel/CardLabel';
 import { parseDate } from '../../utils/parseDate';
 import { mainApi } from '../../utils/MainApi.ts';
 import { useState } from 'react';
+import { useInfo } from '../../contexts/UserContext';
 
 const NewsCard = ({ handleBookmark, removeBookmark, onTrashClick, ...card }) => {
   const {
@@ -18,8 +19,10 @@ const NewsCard = ({ handleBookmark, removeBookmark, onTrashClick, ...card }) => 
   } = card;
 
   const [isFreshSave, setIsFreshSave] = useState(false);
+  const { setAndSortSavedCards, savedCards } = useInfo();
 
   const handleBookmarkClick = () => {
+    setAndSortSavedCards([...savedCards, { ...card, isSaved: true }]);
     mainApi
       .saveArticle({ date: publishedAt, image: urlToImage, keyword, link: url, source: name, text: description, title })
       .then(() => setIsFreshSave(true))

@@ -4,10 +4,12 @@ import ShowMoreButton from '../ShowMoreButton/ShowMoreButton';
 import { useCallback, useEffect, useState } from 'react';
 import Preloader from '../Preloader/Preloader';
 import ArticleSection from '../ArticleSection/ArticleSection';
+import { useInfo } from '../../contexts/UserContext';
 
-const SearchResults = ({ handleBookmark, removeBookmark, savedCards, isSearching, searchResults, keyword }) => {
+const SearchResults = ({ handleBookmark, removeBookmark, isSearching, searchResults, keyword }) => {
   const [displaySets, setDisplaySets] = useState(0);
   const [displayCards, setDisplayCards] = useState([]);
+  const { savedCards } = useInfo();
 
   const handleGetNextCards = () => {
     const nextThree = getDisplayCards(searchResults, displaySets + 1);
@@ -27,6 +29,7 @@ const SearchResults = ({ handleBookmark, removeBookmark, savedCards, isSearching
   );
 
   useEffect(() => {
+    // console.log(getDisplayCards(searchResults));
     setDisplaySets(0);
     setDisplayCards([]);
     if (searchResults?.length !== 0) {

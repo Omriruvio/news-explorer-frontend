@@ -1,10 +1,10 @@
 import './SavedNewsHeader.css';
 import { useEffect, useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useInfo } from '../../contexts/UserContext';
 import { parseKeywords } from '../../utils/parseKeywords.ts';
 
-const SavedNewsHeader = ({ savedCards }) => {
-  const { currentUser } = useAuth();
+const SavedNewsHeader = () => {
+  const { currentUser, savedCards } = useInfo();
   const [keywords, setKeywords] = useState('');
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const SavedNewsHeader = ({ savedCards }) => {
     <section className='saved-articles-info'>
       <h2 className='saved-articles-info__header'>Saved articles</h2>
       <span className='saved-articles-info__article-count'>
-        {currentUser.name || 'Elise'} you have {savedCards.length} saved articles
+        {currentUser.name} you have {savedCards.length} saved articles
       </span>
       <span className='saved-articles-info__keywords'>By keywords: </span>
       <span className='saved-articles-info__keywords saved-articles-info__keywords_bold'>{keywords}</span>

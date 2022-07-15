@@ -1,34 +1,20 @@
+import './App.css';
 import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Main from '../Main/Main';
-import './App.css';
 import Footer from '../Footer/Footer';
 import Articles from '../Articles/Articles';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { usePopups, popupActions } from '../../contexts/PopupContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { useAuth } from '../../contexts/AuthContext';
+import { useInfo } from '../../contexts/UserContext';
 import { mainApi } from '../../utils/MainApi.ts';
 
 function App() {
   const [, popupDispatch] = usePopups();
-  const { currentUser } = useAuth();
-  const [savedCards, setSavedCards] = useState([]);
+  const { currentUser, setAndSortSavedCards } = useInfo();
   const navigate = useNavigate();
   const location = useLocation();
-
-  const removeBookmark = (url) => {
-    const card = savedCards.find((card) => card.url === url);
-    if (card) {
-      mainApi
-        .deleteArticle(card.id)
-        .then(() => {
-          setSavedCards((oldCards) => oldCards.filter((card) => card.url !== url));
-        })
-        .catch((err) => console.log(err));
-    } else {
-      setSavedCards((oldCards) => oldCards.filter((card) => card.url !== url));
-    }
-  };
+  const { signIn } = useInfo();
 
   useEffect(() => {
     const closeByEsc = (e) => {
@@ -39,8 +25,7 @@ function App() {
   }, [popupDispatch]);
 
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    if (!jwt && !currentUser.isLoggedIn && location.pathname === '/saved-articles') {
+    if (!currentUser.isLoggedIn && location.pathname === '/saved-articles') {
       navigate('/');
       popupDispatch(popupActions.openSignUpPopup);
       return;
@@ -52,21 +37,29 @@ function App() {
     if (jwt) {
       mainApi.setUserToken(JSON.parse(jwt));
       mainApi
+        .getCurrentUser()
+        .then((user) => {
+          signIn(user.name);
+        })
+        .catch((err) => console.log(err));
+      mainApi
         .getUserArticles()
-        .then((cards) => setSavedCards(cards))
+        .then((cards) => {
+          setAndSortSavedCards(cards);
+        })
         .catch((err) => console.log(err));
     }
-  }, []);
+  }, [setAndSortSavedCards, signIn]);
 
   return (
     <div className='app'>
       <Routes>
-        <Route path='/' element={<Main savedCards={savedCards} removeBookmark={removeBookmark} />} />
+        <Route path='/' element={<Main />} />
         <Route
           path='/saved-articles'
           element={
             <ProtectedRoute isLoggedIn={currentUser.isLoggedIn} redirectPath='/'>
-              <Articles savedCards={savedCards} />
+              <Articles />
             </ProtectedRoute>
           }
         />

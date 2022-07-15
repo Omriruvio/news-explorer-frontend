@@ -4,7 +4,7 @@ import bookmarkBlue from '../../images/bookmark-blue.svg';
 import bookmarkBlack from '../../images/bookmark-black.svg';
 import trashButtonBlack from '../../images/trash-black.svg';
 import trashButtonGrey from '../../images/trash-grey.svg';
-import { useAuth } from '../../contexts/AuthContext';
+import { useInfo } from '../../contexts/UserContext';
 import { useLocation } from 'react-router';
 import { useState } from 'react';
 import { usePopups, popupActions } from '../../contexts/PopupContext';
@@ -13,7 +13,7 @@ const CardLabel = ({ text, isSaved, isFreshSave, onBookmark, removeBookmark, onT
   const isArticles = useLocation().pathname === '/saved-articles';
   const [trashIcon, setTrashIcon] = useState(trashButtonGrey);
   const [bookmarkIcon, setBookmarkIcon] = useState(bookmarkGrey);
-  const { currentUser } = useAuth();
+  const { currentUser } = useInfo();
   const [, popupDispatch] = usePopups();
 
   const handleBookmarkClick = () => {
