@@ -4,7 +4,6 @@ import './AuthForm.css';
 const AuthForm = ({ formName, onSubmit, buttonText, withNameField, responseError }) => {
   const { inputs, errors, isValid, handleChange } = useInputsAndValidation();
   const handleSubmit = (e) => {
-    // Temporary, pre API handler
     e.preventDefault();
     onSubmit(inputs);
   };

@@ -19,7 +19,7 @@ const Main = ({ handleSignin, handleSignup, responseError, setResponseError }) =
   const [popupState, popupDispatch] = usePopups();
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-  const [searchKeyword, setSearchKeyword] = useState();
+  const [searchKeyword, setSearchKeyword] = useState('');
   const [nothingFound, setNothingFound] = useState(false);
   const [connectionError, setConnectionError] = useState(false);
 
