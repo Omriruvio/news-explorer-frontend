@@ -1,11 +1,13 @@
+import { reduceDays } from './timeDiffs.ts';
+
 class NewsApi {
   constructor(baseUrl, apiKey, fromOffset = 7) {
     this._baseUrl = baseUrl;
-    this._apiKey = apiKey; /* '2022-07-11'; */
+    this._apiKey = apiKey;
     this._fromOffset = fromOffset;
     const date = new Date();
-    this._todaysDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-    this._fromDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate() - this._fromOffset}`;
+    this._todaysDate = reduceDays(date, 0);
+    this._fromDate = reduceDays(date, this._fromOffset);
     console.log(this._fromDate);
   }
 
@@ -18,4 +20,4 @@ class NewsApi {
   };
 }
 
-export const newsApi = new NewsApi('https://nomoreparties.co/news/v2/top-headlines', '86ad54dd62e841a587816647ddf6c6d7');
+export const newsApi = new NewsApi('https://nomoreparties.co/news/v2/everything', '86ad54dd62e841a587816647ddf6c6d7');
