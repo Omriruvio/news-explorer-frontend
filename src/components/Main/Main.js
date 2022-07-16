@@ -6,13 +6,14 @@ import PageTitle from '../PageTitle/PageTitle';
 import SearchForm from '../SearchForm/SearchForm';
 import SearchResults from '../SearchResults/SearchResults';
 import AboutMe from '../AboutMe/AboutMe';
-import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { usePopups, popupActions } from '../../contexts/PopupContext';
-import AuthForm from '../AuthForm/AuthForm';
 import { useState, useEffect } from 'react';
 import NothingFound from '../NothingFound/NothingFound';
 import ConnectionError from '../ConnectionError/ConnectionError';
 import { MAX_MOBILE_SIZE } from '../../utils/constants';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
+import Success from '../Success/Success';
 
 const Main = ({ handleSignin, handleSignup, responseError, setResponseError }) => {
   const isMobileSized = useWindowSize().width < MAX_MOBILE_SIZE;
@@ -58,47 +59,9 @@ const Main = ({ handleSignin, handleSignup, responseError, setResponseError }) =
 
   return (
     <>
-      {popupState.isSigninPopupOpen && (
-        <PopupWithForm
-          isOpen={popupState.isSigninPopupOpen}
-          onSubmit={handleSignin}
-          isValid={true}
-          formName='signin'
-          title='Sign in'
-          buttonText='Sign in'
-          redirectText='Sign up'
-          handleRedirect={showSignUp}
-          responseError={responseError}
-        >
-          <AuthForm />
-        </PopupWithForm>
-      )}
-      {popupState.isSignupPopupOpen && (
-        <PopupWithForm
-          withNameField
-          isOpen={popupState.isSignupPopupOpen}
-          onSubmit={handleSignup}
-          isValid={true}
-          formName='signup'
-          title='Sign up'
-          buttonText='Sign up'
-          redirectText='Sign in'
-          handleRedirect={showSignIn}
-          responseError={responseError}
-        >
-          <AuthForm />
-        </PopupWithForm>
-      )}
-      {popupState.isSuccessPopupOpen && (
-        <PopupWithForm
-          hideForm={true}
-          formName='success'
-          isOpen={popupState.isSuccessPopupOpen}
-          title='Registration successfully completed!'
-          redirectText='Sign in'
-          handleRedirect={showSignIn}
-        ></PopupWithForm>
-      )}
+      {popupState.isSigninPopupOpen && <Login handleSignin={handleSignin} showSignUp={showSignUp} responseError={responseError} />}
+      {popupState.isSignupPopupOpen && <Register handleSignup={handleSignup} showSignIn={showSignIn} responseError={responseError} />}
+      {popupState.isSuccessPopupOpen && <Success showSignIn={showSignIn} />}
       <section className='main'>
         <Header />
         {popupState.isUserMenuOpen && isMobileSized && <UserMenu />}

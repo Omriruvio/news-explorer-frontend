@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# News Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Search, browse and bookmark your favorite news articles for later reading.
 
-## Available Scripts
+- [Live deployment](https://www.omri-news.students.nomoredomainssbs.ru/)
 
-In the project directory, you can run:
+- [Backend repository](https://github.com/Omriruvio/news-explorer-backend)
 
-### `npm start`
+## Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![](news-explorer-demo.gif)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+- Search news articles
+- Bookmark
+- Signup / Session persistence
+- Mobile / Tablet / Desktop compatiblity
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech Stack
 
-### `npm run build`
+**Client:** React
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Server:** Node, Express, MongoDB
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Run Locally
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Clone the project
 
-### `npm run eject`
+```bash
+  git clone https://github.com/Omriruvio/news-explorer-frontend.git
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Go to the project directory
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+  cd news-explorer-frontend
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Install dependencies
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+  npm install
+```
 
-## Learn More
+Start the server
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+  npm run start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Roadmap
 
-### Code Splitting
+- Image placeholders
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- UI improvements / Animations
 
-### Analyzing the Bundle Size
+- Externally share articles
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- User preferred color scheme adjustments
 
-### Making a Progressive Web App
+## Acknowledgements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- News API - powered by [News API](https://newsapi.org/)
 
-### Advanced Configuration
+## Contact - Omri Ruvio
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Github](https://www.github.com/omriruvio)
+- [@Twitter ](https://twitter.com/omriruvio)
+- [LinkedIn](www.linkedin.com/in/omri-ruvio)

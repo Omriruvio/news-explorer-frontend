@@ -1,8 +1,9 @@
 /**
  * Receives an array of keywords e.g.:
  * ['Nature', 'Parks', 'Yellowstone', 'Photography', 'Yellowstone', 'Nature', 'Nature']
- * Returns case corrected and summarized list of most used keywords,
- * Returns null on empty array, or non array inputs
+ * @param keywordArray Array of strings representing search keywords
+ * @returns String - case corrected and summarized list of most used keywords
+ * @returns null on empty array, or non array inputs
  **/
 const parseKeywords = (keywordArray: Array<String>): String | null => {
   if (!Array.isArray(keywordArray)) return null;
