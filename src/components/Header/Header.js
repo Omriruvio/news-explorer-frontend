@@ -6,11 +6,12 @@ import useWindowSize from '../../hooks/UseWindowSize';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useLocation } from 'react-router';
+import { MAX_MOBILE_SIZE } from '../../utils/constants';
 
 const Header = () => {
   const [popupState] = usePopups();
   const [headerClassName, setHeaderClassName] = useState('header');
-  const isMobileSized = useWindowSize().width < 650;
+  const isMobileSized = useWindowSize().width < MAX_MOBILE_SIZE;
   const isSavedArticles = useLocation().pathname === '/saved-articles';
 
   useEffect(() => {

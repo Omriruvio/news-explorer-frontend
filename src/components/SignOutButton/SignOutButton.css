@@ -10,11 +10,13 @@
   border: 1px solid #d1d2d6;
   border-radius: 100px;
   align-self: center;
+  padding: 0 15px;
 }
 
 .navbar__sign-out-wrapper_type_menu {
   width: 100%;
   min-height: 56px;
+  padding: 0;
 }
 
 .navbar__sign-out-wrapper:hover:not(.navbar__sign-out-wrapper_type_menu):not(.navbar__sign-out-wrapper_type_main) {
