@@ -3,10 +3,10 @@ import notFound from '../../images/not-found.svg';
 
 const NothingFound = () => {
   return (
-    <section className="nothing-found__container">
-      <img className="nothing-found__image" src={notFound} alt="Sad face emoticon"></img>
-      <span className="nothing-found__title">Nothing found</span>
-      <span className="nothing-found__text">Sorry, but nothing matched your search terms.</span>
+    <section className='connection-error__container'>
+      <img className='connection-error__image' src={notFound} alt='Sad face emoticon'></img>
+      <span className='connection-error__title'>Nothing found</span>
+      <span className='connection-error__text'>Sorry, but nothing matched your search terms.</span>
     </section>
   );
 };

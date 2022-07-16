@@ -24,6 +24,10 @@
   color: #b6bcbf;
 }
 
+.search-form__input_error::placeholder {
+  color: #ff0000ca;
+}
+
 .search-form__submit {
   padding: 0;
   font-family: Roboto, sans-serif;
