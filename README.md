@@ -49,6 +49,14 @@ Start the server
   npm run start
 ```
 
+## Deploy the frontend
+
+After making desired changes:
+
+```bash
+  npm run deploy
+```
+
 ## Roadmap
 
 - Image placeholders
