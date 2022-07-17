@@ -2,7 +2,7 @@
 
 Search, browse and bookmark your favorite news articles for later reading.
 
-- [Live deployment](https://www.omri-news.students.nomoredomainssbs.ru/)
+- [Live deployment](https://news.omriruvio.com/)
 
 - [Backend repository](https://github.com/Omriruvio/news-explorer-backend)
 
