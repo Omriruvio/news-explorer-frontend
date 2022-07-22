@@ -7,17 +7,14 @@ import { useInfo } from '../../contexts/UserContext';
 import { popupActions, usePopups } from '../../contexts/PopupContext';
 
 const NewsCard = ({ removeBookmark, ...card }) => {
-  const {
-    id: searchId,
-    keyword,
-    isSaved,
-    title,
-    description,
-    publishedAt,
-    url,
-    urlToImage,
-    source: { name },
-  } = card;
+  const { keyword, isSaved, title, publishedAt, url } = card;
+
+  // following fallbacks are in case main API doesnt work
+  // fallbacks are secondaryApi response object params
+  const name = card?.source?.name || card.author;
+  const searchId = card?.id || card._id;
+  const urlToImage = card?.urlToImage || card.media;
+  const description = card?.description || card.summary;
 
   const { currentUser, setAndSortSavedCards, savedCards } = useInfo();
   const [, popupDispatch] = usePopups();

@@ -47,7 +47,8 @@ const SearchResults = ({ isSearching, searchResults, keyword }) => {
           {displaySets !== 0 && <h2 className='results__title'>Search results</h2>}
           <ul className='results__article-container'>
             {displayCards.map((card) => (
-              <NewsCard key={card.author + card.source.name + card.publishedAt} keyword={keyword} {...card}></NewsCard>
+              // fallbacks are for alternative API results
+              <NewsCard key={card.author + `${card?.source?.name || card._id}` + card.publishedAt} keyword={keyword} {...card}></NewsCard>
             ))}
           </ul>
           {!isSearching && displayCards.length < searchResults.length && <ShowMoreButton getNextCards={handleGetNextCards} />}

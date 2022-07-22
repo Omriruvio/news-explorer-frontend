@@ -1,5 +1,5 @@
 import './SearchForm.css';
-import { newsApi } from '../../utils/NewsApi';
+import { newsApi, secondaryApi } from '../../utils/NewsApi';
 import { useState } from 'react';
 
 const SearchForm = ({ connectionError, buttonText = 'Search', handleSearch, setIsSearching }) => {
@@ -24,9 +24,7 @@ const SearchForm = ({ connectionError, buttonText = 'Search', handleSearch, setI
     }
 
     setIsSearching(true);
-
-    newsApi
-      .getNewsByQuery(searchQuery)
+    Promise.any([newsApi.getNewsByQuery(searchQuery), secondaryApi.getNewsByQuery(searchQuery)])
       .then((res) => {
         const { articles } = res;
         handleSearch(articles, searchQuery);
@@ -41,6 +39,23 @@ const SearchForm = ({ connectionError, buttonText = 'Search', handleSearch, setI
         setInputClassName('search-form__input');
         setIsSearching(false);
       });
+
+    // newsApi
+    //   .getNewsByQuery(searchQuery)
+    //   .then((res) => {
+    //     const { articles } = res;
+    //     handleSearch(articles, searchQuery);
+    //   })
+    //   .catch((err) => {
+    //     connectionError(true);
+    //     console.log(err);
+    //   })
+    //   .finally(() => {
+    //     setSearchQuery('');
+    //     setPlaceholder('Enter topic');
+    //     setInputClassName('search-form__input');
+    //     setIsSearching(false);
+    //   });
   };
 
   return (
