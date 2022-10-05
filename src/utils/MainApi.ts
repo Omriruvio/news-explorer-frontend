@@ -59,4 +59,4 @@ class MainApi {
   setUserToken = (token: string) => (this._authToken = token);
 }
 
-export const mainApi = new MainApi('https://api.omri-news.students.nomoredomainssbs.ru');
+export const mainApi = new MainApi('https://api.news.omriruvio.com');

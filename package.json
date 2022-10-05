@@ -18,7 +18,7 @@
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r ./build/* omri@20.254.30.150:~/news-explorer-frontend"
+    "deploy": "npm run build && scp -r ./build/* root@194.195.244.210:/home/omriruvio/news-explorer-frontend"
   },
   "eslintConfig": {
     "extends": [
